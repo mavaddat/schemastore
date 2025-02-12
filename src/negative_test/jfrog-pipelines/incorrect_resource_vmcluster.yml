@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+resources:
+  - name: VmClusterResource
+    type: VmCluster
+    configuration:

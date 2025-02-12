@@ -1,16 +1,16 @@
 {
-    "disabled": false,
-    "bindings": [
-        {
-            "type": "httpTrigger",
-            "direction": "in",
-            "webHookType": "genericJson",
-            "name": "req"
-        },
-        {
-            "type": "http",
-            "direction": "out",
-            "name": "res"
-        }
-    ]
+  "bindings": [
+    {
+      "direction": "in",
+      "name": "req",
+      "type": "httpTrigger",
+      "webHookType": "genericJson"
+    },
+    {
+      "direction": "out",
+      "name": "res",
+      "type": "http"
+    }
+  ],
+  "disabled": false
 }

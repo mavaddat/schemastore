@@ -1,38 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "SARIF External Property File Schema Version 2.1.0 JSON Schema",
-  "$id": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-external-property-file-schema-2.1.0.json",
-  "type": "object",
+  "$id": "https://json.schemastore.org/sarif-external-property-file-2.1.0.json",
+  "additionalProperties": false,
   "properties": {
-
     "$schema": {
       "description": "The URI of the JSON schema corresponding to the version of the external property file format.",
       "type": "string",
       "format": "uri"
     },
-
     "version": {
       "description": "The SARIF format version of this external properties object.",
-      "enum": [ "2.1.0" ]
+      "enum": ["2.1.0"]
     },
-
     "guid": {
-      "description": "A stable, unique identifer for this external properties object, in the form of a GUID.",
+      "description": "A stable, unique identifier for this external properties object, in the form of a GUID.",
       "type": "string",
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
     },
-
     "runGuid": {
-      "description": "A stable, unique identifer for the run associated with this external properties object, in the form of a GUID.",
+      "description": "A stable, unique identifier for the run associated with this external properties object, in the form of a GUID.",
       "type": "string",
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
     },
-
     "conversion": {
-      "description": "A conversion object that will be merged with an external run.",
-      "$ref": "sarif-schema-2.1.0.json#/definitions/conversion"
+      "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/conversion",
+      "description": "A conversion object that will be merged with an external run."
     },
-
     "graphs": {
       "description": "An array of graph objects that will be merged with an external run.",
       "type": "array",
@@ -40,25 +33,22 @@
       "default": [],
       "uniqueItems": true,
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/graph"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/graph"
       }
     },
-
     "externalizedProperties": {
-      "description": "Key/value pairs that provide additional information that will be merged with an external run.",
-      "$ref": "sarif-schema-2.1.0.json#/definitions/propertyBag"
+      "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/propertyBag",
+      "description": "Key/value pairs that provide additional information that will be merged with an external run."
     },
-
     "artifacts": {
       "description": "An array of artifact objects that will be merged with an external run.",
       "type": "array",
       "minItems": 0,
       "uniqueItems": true,
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/artifact"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/artifact"
       }
     },
-
     "invocations": {
       "description": "Describes the invocation of the analysis tool that will be merged with an external run.",
       "type": "array",
@@ -66,10 +56,9 @@
       "uniqueItems": false,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/invocation"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/invocation"
       }
     },
-
     "logicalLocations": {
       "description": "An array of logical locations such as namespaces, types or functions that will be merged with an external run.",
       "type": "array",
@@ -77,10 +66,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/logicalLocation"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/logicalLocation"
       }
     },
-
     "threadFlowLocations": {
       "description": "An array of threadFlowLocation objects that will be merged with an external run.",
       "type": "array",
@@ -88,10 +76,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/threadFlowLocation"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/threadFlowLocation"
       }
     },
-
     "results": {
       "description": "An array of result objects that will be merged with an external run.",
       "type": "array",
@@ -99,10 +86,9 @@
       "uniqueItems": false,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/result"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/result"
       }
     },
-
     "taxonomies": {
       "description": "Tool taxonomies that will be merged with an external run.",
       "type": "array",
@@ -110,15 +96,13 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/toolComponent"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/toolComponent"
       }
     },
-
     "driver": {
-      "description": "The analysis tool object that will be merged with an external run.",
-      "$ref": "sarif-schema-2.1.0.json#/definitions/toolComponent"
+      "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/toolComponent",
+      "description": "The analysis tool object that will be merged with an external run."
     },
-
     "extensions": {
       "description": "Tool extensions that will be merged with an external run.",
       "type": "array",
@@ -126,10 +110,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/toolComponent"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/toolComponent"
       }
     },
-
     "policies": {
       "description": "Tool policies that will be merged with an external run.",
       "type": "array",
@@ -137,10 +120,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/toolComponent"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/toolComponent"
       }
     },
-
     "translations": {
       "description": "Tool translations that will be merged with an external run.",
       "type": "array",
@@ -148,10 +130,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/toolComponent"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/toolComponent"
       }
     },
-
     "addresses": {
       "description": "Addresses that will be merged with with an external run.",
       "type": "array",
@@ -159,10 +140,9 @@
       "uniqueItems": false,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/address"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/address"
       }
     },
-
     "webRequests": {
       "description": "Requests that will be merged with an external run.",
       "type": "array",
@@ -170,10 +150,9 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/webRequest"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/webRequest"
       }
     },
-
     "webResponses": {
       "description": "Responses that will be merged with an external run.",
       "type": "array",
@@ -181,15 +160,15 @@
       "uniqueItems": true,
       "default": [],
       "items": {
-        "$ref": "sarif-schema-2.1.0.json#/definitions/webResponse"
+        "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/webResponse"
       }
     },
-
     "properties": {
-      "description": "Key/value pairs that provide additional information about the external properties.",
-      "$ref": "sarif-schema-2.1.0.json#/definitions/propertyBag"
+      "$ref": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json#/definitions/propertyBag",
+      "description": "Key/value pairs that provide additional information about the external properties."
     }
   },
-  "required": [ "version" ],
-  "additionalProperties": false
+  "required": ["version"],
+  "title": "SARIF External Property File Schema Version 2.1.0 JSON Schema",
+  "type": "object"
 }

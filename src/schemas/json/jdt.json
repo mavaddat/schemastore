@@ -1,9 +1,8 @@
 {
-  "title": "JSON schema for JSON Document Transforms",
   "$schema": "http://json-schema.org/draft-04/schema#",
-
-  "type": "object",
-
+  "additionalProperties": {
+    "$ref": "#"
+  },
   "definitions": {
     "@jdt.path": {
       "type": "string",
@@ -14,71 +13,95 @@
       "description": "The transformation value that should be applied."
     }
   },
-
+  "id": "https://json.schemastore.org/jdt.json",
   "properties": {
     "@jdt.rename": {
-      "type": [ "array", "object" ],
-      "description": "Renames nodes",
-      "properties": {
-        "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-        "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
-      },
-      "items": {
-        "properties": {
-          "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-          "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
+      "anyOf": [
+        {
+          "type": "object",
+          "description": "Renames nodes",
+          "properties": {
+            "@jdt.path": {
+              "$ref": "#/definitions/@jdt.path"
+            },
+            "@jdt.value": {
+              "$ref": "#/definitions/@jdt.value"
+            }
+          }
+        },
+        {
+          "type": "array",
+          "description": "Renames nodes",
+          "items": {
+            "properties": {
+              "@jdt.path": {
+                "$ref": "#/definitions/@jdt.path"
+              },
+              "@jdt.value": {
+                "$ref": "#/definitions/@jdt.value"
+              }
+            }
+          }
         }
-      }
+      ]
     },
-
     "@jdt.replace": {
-      "type": [ "array", "object" ],
+      "type": ["array", "object"],
       "description": "Replaces the current node with the given value. ",
       "properties": {
-        "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-        "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
+        "@jdt.path": {
+          "$ref": "#/definitions/@jdt.path"
+        },
+        "@jdt.value": {
+          "$ref": "#/definitions/@jdt.value"
+        }
       },
       "items": {
         "properties": {
-          "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-          "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
+          "@jdt.path": {
+            "$ref": "#/definitions/@jdt.path"
+          },
+          "@jdt.value": {
+            "$ref": "#/definitions/@jdt.value"
+          }
         }
       }
     },
-
     "@jdt.remove": {
-      "type": [ "array", "boolean", "object", "string" ],
+      "type": ["array", "boolean", "object", "string"],
       "description": "Removes the node with the given name from the current level.",
       "properties": {
-        "@jdt.path": { "$ref": "#/definitions/@jdt.path" }
+        "@jdt.path": {
+          "$ref": "#/definitions/@jdt.path"
+        }
       },
       "items": {
-        "type": [ "boolean", "integer", "null", "number", "object", "string" ]
+        "type": ["boolean", "integer", "null", "number", "object", "string"]
       }
     },
-
     "@jdt.merge": {
       "description": "Merges the current node value with the given object.",
-      "type": [ "object", "array" ],
+      "type": ["object", "array"],
       "properties": {
-        "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-        "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
+        "@jdt.path": {
+          "$ref": "#/definitions/@jdt.path"
+        },
+        "@jdt.value": {
+          "$ref": "#/definitions/@jdt.value"
+        }
       },
       "items": {
         "properties": {
-          "@jdt.path": { "$ref": "#/definitions/@jdt.path" },
-          "@jdt.value": { "$ref": "#/definitions/@jdt.value" }
+          "@jdt.path": {
+            "$ref": "#/definitions/@jdt.path"
+          },
+          "@jdt.value": {
+            "$ref": "#/definitions/@jdt.value"
+          }
         }
       }
     }
   },
-
-  "additionalProperties": {
-    "$ref": "#"
-  },
-  "additionalItems": {
-    "items": {
-      "$ref": "#"
-    }
-  }
+  "title": "JSON schema for JSON Document Transforms",
+  "type": "object"
 }

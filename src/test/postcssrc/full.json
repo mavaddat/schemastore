@@ -1,12 +1,12 @@
 {
+  "from": "./from.css",
+  "map": "inline",
   "parser": "postcss-scss",
+  "plugins": {
+    "bar": {},
+    "foo": false
+  },
   "stringifier": "postcss-scss",
   "syntax": "postcss-scss",
-  "map": "inline",
-  "from": "./from.css",
-  "to": "./to.css",
-  "plugins": {
-    "foo": false,
-    "bar": {}
-  }
+  "to": "./to.css"
 }

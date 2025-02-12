@@ -1,5 +1,10 @@
 {
-  "version": 2.1,
+  "codecov": {
+    "run": {
+      "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json",
+      "name": "Codecov"
+    }
+  },
   "commands": {
     "build-image": {
       "description": "Build Docker image, push to Google Container Registry",
@@ -15,45 +20,8 @@
       ]
     }
   },
-  "workflows": {
-    "version": 2,
-    "chromeless": {
-      "jobs": [
-        "build_node_6",
-        "build_node_8",
-        {
-          "release": {
-            "requires": ["build_node_6", "build_node_8"],
-            "filters": {
-              "branches": {
-                "only": "master"
-              }
-            }
-          }
-        }
-      ]
-    }
-  },
-  "restore_cache": {
-    "restore_cache": {
-      "keys": ["npm-cache-{{ checksum \"package-lock.json\" }}"]
-    }
-  },
-  "save_cache": {
-    "save_cache": {
-      "key": "npm-cache-{{ checksum \"package-lock.json\" }}",
-      "paths": ["~/.npm"]
-    }
-  },
-  "codecov": {
-    "run": {
-      "name": "Codecov",
-      "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json"
-    }
-  },
   "jobs": {
     "build_node_6": {
-      "working_directory": "~/chromeless",
       "docker": [
         {
           "image": "circleci/node:6"
@@ -90,8 +58,8 @@
         },
         {
           "run": {
-            "name": "Codecov",
-            "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json"
+            "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json",
+            "name": "Codecov"
           }
         },
         {
@@ -99,10 +67,10 @@
             "gcloud-service-key": "SERVICE_KEY_STRING"
           }
         }
-      ]
+      ],
+      "working_directory": "~/chromeless"
     },
     "build_node_8": {
-      "working_directory": "~/chromeless",
       "docker": [
         {
           "image": "circleci/node:8"
@@ -140,14 +108,14 @@
         },
         {
           "run": {
-            "name": "Codecov",
-            "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json"
+            "command": "node_modules/.bin/nyc report --reporter=json && bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json",
+            "name": "Codecov"
           }
         }
-      ]
+      ],
+      "working_directory": "~/chromeless"
     },
     "release": {
-      "working_directory": "~/chromeless",
       "docker": [
         {
           "image": "circleci/node:8"
@@ -171,8 +139,8 @@
         },
         {
           "restore_cache": {
-            "name": "Restore npm cache",
-            "keys": ["npm-cache-{{ checksum \"package-lock.json\" }}"]
+            "keys": ["npm-cache-{{ checksum \"package-lock.json\" }}"],
+            "name": "Restore npm cache"
           }
         },
         {
@@ -180,15 +148,47 @@
         },
         {
           "save_cache": {
-            "name": "Save npm cache",
             "key": "npm-cache-{{ checksum \"package-lock.json\" }}",
+            "name": "Save npm cache",
             "paths": ["~/.npm"]
           }
         },
         {
           "run": "npm run semantic-release"
         }
-      ]
+      ],
+      "working_directory": "~/chromeless"
     }
+  },
+  "restore_cache": {
+    "restore_cache": {
+      "keys": ["npm-cache-{{ checksum \"package-lock.json\" }}"]
+    }
+  },
+  "save_cache": {
+    "save_cache": {
+      "key": "npm-cache-{{ checksum \"package-lock.json\" }}",
+      "paths": ["~/.npm"]
+    }
+  },
+  "version": 2.1,
+  "workflows": {
+    "chromeless": {
+      "jobs": [
+        "build_node_6",
+        "build_node_8",
+        {
+          "release": {
+            "filters": {
+              "branches": {
+                "only": "master"
+              }
+            },
+            "requires": ["build_node_6", "build_node_8"]
+          }
+        }
+      ]
+    },
+    "version": 2
   }
 }

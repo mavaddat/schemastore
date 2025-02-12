@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+pipelines:
+  - name: test_pipeline_1
+    steps:
+      - name: to_build_docker_image
+        type: DockerBuild
+        configuration:
+          affinityGroup: test_affinity_group

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+pipelines:
+  - name: test_pipeline_1
+    steps:
+      - name: to_promote_build
+        type: PromoteBuild
+        configuration:
+          integrations:
+            - name: artifactory_integration

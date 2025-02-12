@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../../schemas/json/drupal-libraries.json
+cuddly-slider:
+  version: 1.x
+  css:
+    layout:
+      css/cuddly-slider-layout.css: {}
+    theme:
+      css/cuddly-slider-theme.css: {}
+  js:
+    js/cuddly-slider.js: {}

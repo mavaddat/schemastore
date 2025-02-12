@@ -1,15 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$comment": "https://github.com/actions/labeler",
-  "title": "Pull Request Labeler",
-  "description": "A GitHub Action for automatically labelling pull requests.",
-  "type": "object",
   "additionalProperties": {
     "title": "Label",
-    "type": [
-      "string",
-      "array"
-    ],
+    "type": ["string", "array"],
     "items": {
       "anyOf": [
         {
@@ -35,5 +29,9 @@
         }
       ]
     }
-  }
+  },
+  "description": "A GitHub Action for automatically labelling pull requests.",
+  "id": "https://json.schemastore.org/pull-request-labeler.json",
+  "title": "Pull Request Labeler",
+  "type": "object"
 }

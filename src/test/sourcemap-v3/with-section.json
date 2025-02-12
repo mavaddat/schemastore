@@ -1,20 +1,26 @@
 {
-    "version": 3,
-    "file": "app.js",
-    "sections": [
-        {
-            "offset": { "line": 0, "column": 0 },
-            "url": "url_for_part1.map"
-        },
-        {
-            "offset": { "line": 100, "column": 10 },
-            "map": {
-                "version": 3,
-                "file": "section.js",
-                "sources": [ "foo.js", "bar.js" ],
-                "names": [ "src", "maps", "are", "fun" ],
-                "mappings": "AAAA,E;;ABCDE;"
-            }
-        }
-    ]
+  "file": "app.js",
+  "sections": [
+    {
+      "offset": {
+        "column": 0,
+        "line": 0
+      },
+      "url": "url_for_part1.map"
+    },
+    {
+      "map": {
+        "file": "section.js",
+        "mappings": "AAAA,E;;ABCDE;",
+        "names": ["src", "maps", "are", "fun"],
+        "sources": ["foo.js", "bar.js"],
+        "version": 3
+      },
+      "offset": {
+        "column": 10,
+        "line": 100
+      }
+    }
+  ],
+  "version": 3
 }

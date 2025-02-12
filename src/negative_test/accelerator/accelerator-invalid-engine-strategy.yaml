@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../../schemas/json/accelerator.json
+accelerator:
+  displayName: Hello
+
+engine:
+  type: Merge
+  sources:
+    - type: Include
+      patterns: ['**/*.yaml']
+    - type: UniquePath
+      strategy: InvalidStrategy

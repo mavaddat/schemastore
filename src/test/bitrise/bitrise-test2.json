@@ -1,8 +1,21 @@
 {
+  "default_step_lib_source": "https://github.com/bitrise-io/bitrise-steplib.git",
   "format_version": "1.3.1",
   "project_type": "other",
-  "default_step_lib_source": "https://github.com/bitrise-io/bitrise-steplib.git",
   "workflows": {
+    "ci": {
+      "after_run": ["send-notifications"],
+      "before_run": ["test"]
+    },
+    "deploy": {
+      "after_run": ["send-notifications"],
+      "before_run": ["test"],
+      "steps": [
+        {
+          "git-clone@4.0.11": {}
+        }
+      ]
+    },
     "send-notifications": {
       "steps": [
         {
@@ -49,19 +62,6 @@
           "git-clone@4.0.11": {}
         }
       ]
-    },
-    "ci": {
-      "before_run": ["test"],
-      "after_run": ["send-notifications"]
-    },
-    "deploy": {
-      "before_run": ["test"],
-      "steps": [
-        {
-          "git-clone@4.0.11": {}
-        }
-      ],
-      "after_run": ["send-notifications"]
     }
   }
 }

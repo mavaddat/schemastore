@@ -2,12 +2,10 @@
   "apiVersion": "backstage.io/v1alpha1",
   "kind": "Location",
   "metadata": {
-    "name": "acme-corp",
-    "description": "A collection of all Backstage example Groups"
+    "description": "A collection of all Backstage example Groups",
+    "name": "acme-corp"
   },
   "spec": {
-    "targets": [
-      "./acme/org.yaml"
-    ]
+    "targets": ["./acme/org.yaml"]
   }
 }

@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../../schemas/json/tmuxinator.json
+# ~/.tmuxinator/noname.yml
+# you can make as many tabs as you wish...
+
+root: ~/test
+windows:
+  - test: echo foo

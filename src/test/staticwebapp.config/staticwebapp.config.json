@@ -1,198 +1,191 @@
 {
-    "routes": [
-        {
-            "route": "/redirect/301",
-            "redirect": "/index2.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/redirect/302",
-            "redirect": "/index2.html",
-            "statusCode": 302
-        },
-        {
-            "route": "/redirect/*",
-            "redirect": "/index2.html"
-        },
-        {
-            "route": "/*.google",
-            "redirect": "https://www.google.com/"
-        },
-        {
-            "route": "/*.{jpg}",
-            "redirect": "/jpg.html"
-        },
-        {
-            "route": "*.foo",
-            "redirect": "/foo.html"
-        },
-        {
-            "route": "/*.{png,gif}",
-            "redirect": "/png_gif.html"
-        },
-        {
-            "route": "/folder/*.{html,xml}",
-            "rewrite": "/folder/"
-        },
-        {
-            "route": "/rewrite_index2",
-            "rewrite": "/index2.html",
-            "headers": {
-                "a": "c",
-                "foo": "bar"
-            }
-        },
-        {
-            "route": "/rewrite-to-function",
-            "rewrite": "/api/headers"
-        },
-        {
-            "route": "/login",
-            "rewrite": "/.auth/login/github"
-        },
-        {
-            "route": "/login/aad",
-            "rewrite": "/.auth/login/aad"
-        },
-        {
-            "route": "/.auth/login/twitter",
-            "statusCode": 401
-        },
-        {
-            "route": "/.auth/login/facebook",
-            "statusCode": 401
-        },
-        {
-            "route": "/.auth/login/google",
-            "statusCode": 401
-        },
-        {
-            "route": "/restricted",
-            "rewrite": "/index.html",
-            "allowedRoles": [
-                "reader",
-                "contributor"
-            ]
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "auth": {
+    "identityProviders": {
+      "apple": {
+        "registration": {
+          "clientIdSettingName": "<APPLE_CLIENT_ID>",
+          "clientSecretSettingName": "<APPLE_CLIENT_SECRET>"
         }
+      },
+      "azureActiveDirectory": {
+        "registration": {
+          "clientIdSettingName": "<AAD_CLIENT_ID>",
+          "clientSecretSettingName": "<AAD_CLIENT_SECRET>",
+          "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>"
+        }
+      },
+      "customOpenIdConnectProviders": {
+        "myProvider": {
+          "login": {
+            "loginParameterNames": [],
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": []
+          },
+          "registration": {
+            "clientCredential": {
+              "clientSecretSettingName": "<MY_PROVIDER_CLIENT_SECRET>"
+            },
+            "clientIdSettingName": "<MY_PROVIDER_CLIENT_ID>",
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://<MY_ID_SERVER>/.well-known/openid-configuration"
+            }
+          }
+        },
+        "myProvider2": {
+          "login": {
+            "loginParameterNames": [],
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": []
+          },
+          "registration": {
+            "clientCredential": {
+              "clientSecretSettingName": "<MY_PROVIDER_CLIENT_SECRET>"
+            },
+            "clientIdSettingName": "<MY_PROVIDER_CLIENT_ID>",
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://<MY_ID_SERVER>/.well-known/openid-configuration"
+            }
+          }
+        }
+      },
+      "facebook": {
+        "registration": {
+          "appIdSettingName": "<FACEBOOK_APP_ID>",
+          "appSecretSettingName": "<FACEBOOK_APP_SECRET>"
+        }
+      },
+      "github": {
+        "registration": {
+          "clientIdSettingName": "<GITHUB_CLIENT_ID>",
+          "clientSecretSettingName": "<GITHUB_CLIENT_SECRET>"
+        }
+      },
+      "google": {
+        "registration": {
+          "clientIdSettingName": "<GOOGLE_CLIENT_ID>",
+          "clientSecretSettingName": "<GOOGLE_CLIENT_SECRET>"
+        }
+      },
+      "twitter": {
+        "registration": {
+          "consumerKeySettingName": "<TWITTER_CONSUMER_KEY>",
+          "consumerSecretSettingName": "<TWITTER_CONSUMER_SECRET>"
+        }
+      }
+    },
+    "rolesSource": "/api/GetRoles"
+  },
+  "forwardingGateway": {
+    "allowedForwardedHosts": [
+      "example.org",
+      "www.example.org",
+      "staging.example.org"
     ],
-    "navigationFallback": {
-        "rewrite": "/index.html",
-        "exclude": [
-            "*.{txt}"
-        ]
+    "requiredHeaders": {
+      "X-Azure-FDID": "10dd26ef"
+    }
+  },
+  "globalHeaders": {
+    "a": "b"
+  },
+  "mimeTypes": {
+    ".swaconfig": "application/json"
+  },
+  "navigationFallback": {
+    "exclude": ["*.{txt}"],
+    "rewrite": "/index.html"
+  },
+  "networking": {
+    "allowedIpRanges": ["10.0.0.0/24", "192.1.1.1/10"]
+  },
+  "platform": {
+    "apiRuntime": "node:16"
+  },
+  "responseOverrides": {
+    "400": {
+      "rewrite": "/custom_error.html",
+      "statusCode": 201
     },
-    "responseOverrides": {
-        "400": {
-            "rewrite": "/custom_error.html",
-            "statusCode": 201
-        },
-        "500": {
-            "redirect": "/custom_error.html"
-        },
-        "501": {
-            "rewrite": "custom_error.html"
-        }
+    "500": {
+      "redirect": "/custom_error.html"
     },
-    "mimeTypes": {
-        ".swaconfig": "application/json"
+    "501": {
+      "rewrite": "custom_error.html"
+    }
+  },
+  "routes": [
+    {
+      "redirect": "/index2.html",
+      "route": "/redirect/301",
+      "statusCode": 301
     },
-    "globalHeaders": {
-        "a": "b"
+    {
+      "redirect": "/index2.html",
+      "route": "/redirect/302",
+      "statusCode": 302
     },
-    "auth": {
-        "rolesSource": "/api/GetRoles",
-        "identityProviders": {
-            "azureActiveDirectory": {
-                "registration": {
-                    "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>",
-                    "clientIdSettingName": "<AAD_CLIENT_ID>",
-                    "clientSecretSettingName": "<AAD_CLIENT_SECRET>"
-                }
-            },
-            "apple": {
-                "registration": {
-                    "clientIdSettingName": "<APPLE_CLIENT_ID>",
-                    "clientSecretSettingName": "<APPLE_CLIENT_SECRET>"
-                }
-            },
-            "facebook": {
-                "registration": {
-                    "appIdSettingName": "<FACEBOOK_APP_ID>",
-                    "appSecretSettingName": "<FACEBOOK_APP_SECRET>"
-                }
-            },
-            "github": {
-                "registration": {
-                    "clientIdSettingName": "<GITHUB_CLIENT_ID>",
-                    "clientSecretSettingName": "<GITHUB_CLIENT_SECRET>"
-                }
-            },
-            "google": {
-                "registration": {
-                    "clientIdSettingName": "<GOOGLE_CLIENT_ID>",
-                    "clientSecretSettingName": "<GOOGLE_CLIENT_SECRET>"
-                }
-            },
-            "twitter": {
-                "registration": {
-                    "consumerKeySettingName": "<TWITTER_CONSUMER_KEY>",
-                    "consumerSecretSettingName": "<TWITTER_CONSUMER_SECRET>"
-                }
-            },
-            "customOpenIdConnectProviders": {
-                "myProvider": {
-                    "registration": {
-                        "clientIdSettingName": "<MY_PROVIDER_CLIENT_ID>",
-                        "clientCredential": {
-                            "clientSecretSettingName": "<MY_PROVIDER_CLIENT_SECRET>"
-                        },
-                        "openIdConnectConfiguration": {
-                            "wellKnownOpenIdConfiguration": "https://<MY_ID_SERVER>/.well-known/openid-configuration"
-                        }
-                    },
-                    "login": {
-                        "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-                        "scopes": [],
-                        "loginParameterNames": []
-                    }
-                },
-                "myProvider2": {
-                    "registration": {
-                        "clientIdSettingName": "<MY_PROVIDER_CLIENT_ID>",
-                        "clientCredential": {
-                            "clientSecretSettingName": "<MY_PROVIDER_CLIENT_SECRET>"
-                        },
-                        "openIdConnectConfiguration": {
-                            "wellKnownOpenIdConfiguration": "https://<MY_ID_SERVER>/.well-known/openid-configuration"
-                        }
-                    },
-                    "login": {
-                        "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-                        "scopes": [],
-                        "loginParameterNames": []
-                    }
-                }
-            }
-        }
+    {
+      "redirect": "/index2.html",
+      "route": "/redirect/*"
     },
-    "networking": {
-        "allowedIpRanges": [
-            "10.0.0.0/24",
-            "192.1.1.1/10"
-        ]
+    {
+      "redirect": "https://www.google.com/",
+      "route": "/*.google"
     },
-    "forwardingGateway": {
-        "allowedForwardedHosts": [
-            "example.org",
-            "www.example.org",
-            "staging.example.org"
-        ],
-        "requiredHeaders": {
-            "X-Azure-FDID": "10dd26ef"
-        }
+    {
+      "redirect": "/jpg.html",
+      "route": "/*.{jpg}"
     },
-    "platform": {
-        "apiRuntime": "node:16"
+    {
+      "redirect": "/foo.html",
+      "route": "*.foo"
     },
-    "trailingSlash": "always"
+    {
+      "redirect": "/png_gif.html",
+      "route": "/*.{png,gif}"
+    },
+    {
+      "rewrite": "/folder/",
+      "route": "/folder/*.{html,xml}"
+    },
+    {
+      "headers": {
+        "a": "c",
+        "foo": "bar"
+      },
+      "rewrite": "/index2.html",
+      "route": "/rewrite_index2"
+    },
+    {
+      "rewrite": "/api/headers",
+      "route": "/rewrite-to-function"
+    },
+    {
+      "rewrite": "/.auth/login/github",
+      "route": "/login"
+    },
+    {
+      "rewrite": "/.auth/login/aad",
+      "route": "/login/aad"
+    },
+    {
+      "route": "/.auth/login/twitter",
+      "statusCode": 401
+    },
+    {
+      "route": "/.auth/login/facebook",
+      "statusCode": 401
+    },
+    {
+      "route": "/.auth/login/google",
+      "statusCode": 401
+    },
+    {
+      "allowedRoles": ["reader", "contributor"],
+      "rewrite": "/index.html",
+      "route": "/restricted"
+    }
+  ],
+  "trailingSlash": "always"
 }

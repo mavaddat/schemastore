@@ -1,14 +1,14 @@
 {
   "WebOptimizer": {
+    "cdnUrl": "",
     "enableCaching": true,
-    "enableTagHelperBundling": false,
-    "cdnUrl": ""
+    "enableTagHelperBundling": false
   },
   "cdn": {
     "url": "//foo.com"
   },
   "pwa": {
-    "registerWebmanifest":  true,
+    "registerWebmanifest": true,
     "strategy": "cacheFirstSafe"
   }
 }

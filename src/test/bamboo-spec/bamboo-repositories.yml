@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../../schemas/json/bamboo-spec.json
+---
+version: 2
+# ...
+repositories:
+  - my-global-repository1
+  - my-global-repository2

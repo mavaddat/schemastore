@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/tmuxinator.json
+name: nameless_window
+root: ~/
+windows:
+  - ~: echo "this is a window with no name"
+  - other: echo "this window has a name"

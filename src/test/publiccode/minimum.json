@@ -1,35 +1,34 @@
 {
-  "publiccodeYmlVersion": "0.2",
-  "name": "Medusa",
-  "url": "https://example.com/italia/medusa.git",
-  "softwareVersion": "dev",
-  "releaseDate": "2017-04-15",
-  "platforms": ["web"],
   "categories": ["financial-reporting"],
-  "developmentStatus": "development",
-  "softwareType": "standalone/desktop",
   "description": {
     "en": {
-      "localisedName": "medusa",
+      "features": ["Just one feature"],
       "genericName": "Text Editor",
-      "shortDescription": "A rather short description which is probably useless\n",
+      "localisedName": "medusa",
       "longDescription": "Very long description of this software, also split on multiple rows. You should note what the software is and why one should need it. We can potentially have many pages of text here.\nThe official example is too short according to their own specification, so additional characters are added.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx",
-      "features": ["Just one feature"]
+      "shortDescription": "A rather short description which is probably useless\n"
     }
   },
+  "developmentStatus": "development",
   "legal": {
     "license": "AGPL-3.0-or-later"
   },
+  "localisation": {
+    "availableLanguages": ["en"],
+    "localisationReady": true
+  },
   "maintenance": {
-    "type": "community",
     "contacts": [
       {
         "name": "Francesco Rossi"
       }
-    ]
+    ],
+    "type": "community"
   },
-  "localisation": {
-    "localisationReady": true,
-    "availableLanguages": ["en"]
-  }
+  "name": "Medusa",
+  "platforms": ["web"],
+  "publiccodeYmlVersion": "0.4",
+  "softwareType": "standalone/desktop",
+  "softwareVersion": "dev",
+  "url": "https://example.com/italia/medusa.git"
 }

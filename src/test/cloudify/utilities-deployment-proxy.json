@@ -1,5 +1,4 @@
 {
-  "tosca_definitions_version": "cloudify_dsl_1_3",
   "imports": [
     "http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml",
     "http://www.getcloudify.org/spec/utilities-plugin/1.18.0/plugin.yaml"
@@ -11,20 +10,13 @@
   },
   "node_templates": {
     "deployment_proxy": {
-      "type": "cloudify.nodes.DeploymentProxy",
       "properties": {
-        "plugins": {
-          "cloudify-openstack-plugin": {
-            "wagon_path": "http://repository.cloudifysource.org/cloudify/wagons/cloudify-openstack-plugin/2.14.1/cloudify_openstack_plugin-2.14.1-py27-none-linux_x86_64-centos-Core.wgn",
-            "plugin_yaml_path": "http://www.getcloudify.org/spec/openstack-plugin/2.14.1/plugin.yaml"
-          }
-        },
         "resource_config": {
           "blueprint": {
-            "id": "deployment_proxy",
             "blueprint_archive": {
               "get_input": "bp_dep_archive"
             },
+            "id": "deployment_proxy",
             "main_file_name": "blueprint.yaml"
           },
           "deployment": {
@@ -34,7 +26,9 @@
             }
           }
         }
-      }
+      },
+      "type": "cloudify.nodes.DeploymentProxy"
     }
-  }
+  },
+  "tosca_definitions_version": "cloudify_dsl_1_3"
 }

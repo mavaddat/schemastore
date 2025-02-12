@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+pipelines:
+  - name: test_pipeline_1
+    steps:
+      - name: helm_pub
+        type: HelmPublish
+        configuration:
+          autoPublishBuildInfo: true
+          lint: true
+          helmVersion: 3
+        execution:
+          onStart:
+            - echo "Preparing for work..."
