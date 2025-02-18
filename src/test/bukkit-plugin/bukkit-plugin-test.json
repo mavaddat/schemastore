@@ -1,56 +1,51 @@
 {
-  "name": "Inferno",
-  "version": "1.4.1",
-  "description": "This plugin is so 31337. You can set yourself on fire.",
+  "api-version": "1.13",
   "author": "CaptainInflamo",
   "authors": ["Cogito", "verrier", "EvilSeph"],
-  "website": "http://www.curse.com/server-mods/minecraft/myplugin",
-  "main": "com.captaininflamo.bukkit.inferno.Inferno",
-  "depend": ["NewFire", "FlameWire"],
-  "libraries": [
-    "com.squareup.okhttp3:okhttp:4.9.0"
-  ],
-  "api-version": "1.13",
   "commands": {
-    "flagrate": {
-      "description": "Set yourself on fire.",
-      "aliases": ["combust_me", "combustMe"],
-      "permission": "inferno.flagrate",
-      "usage": "Syntax error! Simply type /<command> to ignite yourself."
-    },
     "burningdeaths": {
+      "aliases": ["burning_deaths", "burningDeaths"],
       "description": "List how many times you have died by fire.",
-      "aliases": [
-        "burning_deaths",
-        "burningDeaths"
-      ],
       "permission": "inferno.burningdeaths",
       "usage": "/<command> [player]\nExample: /<command> - see how many times you have burned to death\nExample: /<command> CaptainIce - see how many times CaptainIce has burned to death"
+    },
+    "flagrate": {
+      "aliases": ["combust_me", "combustMe"],
+      "description": "Set yourself on fire.",
+      "permission": "inferno.flagrate",
+      "usage": "Syntax error! Simply type /<command> to ignite yourself."
     }
   },
+  "depend": ["NewFire", "FlameWire"],
+  "description": "This plugin is so 31337. You can set yourself on fire.",
+  "libraries": ["com.squareup.okhttp3:okhttp:4.9.0"],
+  "main": "com.captaininflamo.bukkit.inferno.Inferno",
+  "name": "Inferno",
   "permissions": {
     "inferno.*": {
-      "description": "Gives access to all Inferno commands",
       "children": {
-        "inferno.flagrate": true,
         "inferno.burningdeaths": true,
-        "inferno.burningdeaths.others": true
-      }
-    },
-    "inferno.flagrate": {
-      "description": "Allows you to ignite yourself",
-      "default": true
+        "inferno.burningdeaths.others": true,
+        "inferno.flagrate": true
+      },
+      "description": "Gives access to all Inferno commands"
     },
     "inferno.burningdeaths": {
-      "description": "Allows you to see how many times you have burned to death",
-      "default": true
+      "default": true,
+      "description": "Allows you to see how many times you have burned to death"
     },
     "inferno.burningdeaths.others": {
-      "description": "Allows you to see how many times others have burned to death",
-      "default": "op",
       "children": {
         "inferno.burningdeaths": true
-      }
+      },
+      "default": "op",
+      "description": "Allows you to see how many times others have burned to death"
+    },
+    "inferno.flagrate": {
+      "default": true,
+      "description": "Allows you to ignite yourself"
     }
-  }
+  },
+  "version": "1.4.1",
+  "website": "http://www.curse.com/server-mods/minecraft/myplugin"
 }

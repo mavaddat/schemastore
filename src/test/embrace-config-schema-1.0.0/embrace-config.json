@@ -1,0 +1,28 @@
+{
+  "api_token": "12345678901234567890123456789012",
+  "app_id": "12345",
+  "ndk_enabled": true,
+  "sdk_config": {
+    "app": {
+      "report_disk_usage": true
+    },
+    "capture_fcm_pii_data": false,
+    "compose": {
+      "capture_compose_onclick": true
+    },
+    "crash_handler": {
+      "enabled": true
+    },
+    "networking": {
+      "capture_request_content_length": true,
+      "enable_native_monitoring": true
+    },
+    "taps": {
+      "capture_coordinates": true
+    },
+    "webview": {
+      "capture_query_params": true,
+      "enable": true
+    }
+  }
+}

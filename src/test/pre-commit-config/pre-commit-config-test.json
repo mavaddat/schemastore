@@ -1,75 +1,118 @@
 {
-    "ci": {
-        "autofix_commit_msg": "...",
-        "autofix_prs": true,
-        "autoupdate_branch": "",
-        "autoupdate_commit_msg": "...",
-        "autoupdate_schedule": "monthly",
-        "skip": [
-            "end-of-file-fixer"
-        ],
-        "submodules": false
-    },
-    "repos": [
+  "ci": {
+    "autofix_commit_msg": "...",
+    "autofix_prs": true,
+    "autoupdate_branch": "",
+    "autoupdate_commit_msg": "...",
+    "autoupdate_schedule": "monthly",
+    "skip": ["end-of-file-fixer"],
+    "submodules": false
+  },
+  "default_install_hook_types": ["pre-commit"],
+  "default_language_version": {
+    "python": "python3.7"
+  },
+  "default_stages": ["commit", "push"],
+  "exclude": "^*-test.py",
+  "fail_fast": true,
+  "files": "^*.py$",
+  "minimum_pre_commit_version": "1.15.0",
+  "repos": [
+    {
+      "hooks": [
         {
-            "repo": "https://github.com/pre-commit/pre-commit-hooks",
-            "rev": "v2.3.0",
-            "hooks": [
-                {
-                    "id": "check-yaml",
-                    "alias": "foo",
-                    "name": "bar",
-                    "language_version": "2.1.5",
-                    "files": "^*.rb$",
-                    "exclude": "^*.py",
-                    "types": ["file", "ruby"],
-                    "types_or": ["markdown", "ruby"],
-                    "exclude_types": ["symlink"],
-                    "args": ["--foo=baz"],
-                    "stages": ["commit", "manual"],
-                    "additional_dependencies": ["rake"],
-                    "always_run": true,
-                    "verbose": false,
-                    "log_file": "/tmp/log_file.log",
-                    "pass_filenames": true,
-                    "entry": "check-yaml",
-                    "language": "python"
-                },
-                {"id": "end-of-file-fixer"},
-                {"id": "trailing-whitespace"}
-            ]
+          "additional_dependencies": ["rake"],
+          "alias": "foo",
+          "always_run": true,
+          "args": ["--foo=baz"],
+          "entry": "check-yaml",
+          "exclude": "^*.py",
+          "exclude_types": ["symlink"],
+          "files": "^*.rb$",
+          "id": "check-yaml",
+          "language": "python",
+          "language_version": "2.1.5",
+          "log_file": "/tmp/log_file.log",
+          "name": "bar",
+          "pass_filenames": true,
+          "stages": ["commit", "manual"],
+          "types": ["file", "ruby"],
+          "types_or": ["markdown", "ruby"],
+          "verbose": false
         },
         {
-            "repo": "https://github.com/psf/black",
-            "rev": "19.3b0",
-            "hooks": [
-                {"id": "black"}
-            ]
+          "id": "end-of-file-fixer"
         },
         {
-            "repo": "local",
-            "hooks": [
-                {
-                    "id": "display-python-version",
-                    "name": "Prints python version",
-                    "entry": "python --version",
-                    "language": "python"
-                }
-            ]
-        },
-        {
-            "repo": "meta",
-            "hooks": [
-                {"id": "identity"}
-            ]
+          "id": "trailing-whitespace"
         }
-    ],
-    "default_language_version": {
-        "python": "python3.7"
+      ],
+      "repo": "https://github.com/pre-commit/pre-commit-hooks",
+      "rev": "v2.3.0"
     },
-    "default_stages": ["commit", "push"],
-    "files": "^*.py$",
-    "exclude": "^*-test.py",
-    "fail_fast": true,
-    "minimum_pre_commit_version": "1.15.0"
+    {
+      "hooks": [
+        {
+          "id": "black"
+        }
+      ],
+      "repo": "https://github.com/psf/black",
+      "rev": "19.3b0"
+    },
+    {
+      "hooks": [
+        {
+          "entry": "python --version",
+          "id": "display-python-version",
+          "language": "python",
+          "name": "Prints python version"
+        }
+      ],
+      "repo": "local"
+    },
+    {
+      "hooks": [
+        {
+          "id": "identity"
+        }
+      ],
+      "repo": "meta"
+    },
+    {
+      "hooks": [
+        {
+          "id": "some-hook"
+        }
+      ],
+      "repo": "https://github.com/some-org/project-with-meta",
+      "rev": "v1.0.0"
+    },
+    {
+      "hooks": [
+        {
+          "id": "some-hook"
+        }
+      ],
+      "repo": "https://github.com/some-org/project-with-metadata",
+      "rev": "v1.0.0"
+    },
+    {
+      "hooks": [
+        {
+          "id": "some-hook"
+        }
+      ],
+      "repo": "https://github.com/some-org/project-with-local",
+      "rev": "v1.0.0"
+    },
+    {
+      "hooks": [
+        {
+          "id": "some-hook"
+        }
+      ],
+      "repo": "https://github.com/some-org/project-with-local-things",
+      "rev": "v1.0.0"
+    }
+  ]
 }

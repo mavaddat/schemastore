@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+pipelines:
+  - name: test_pipeline_1
+    steps:
+      - name: publish_go_binary_test
+        type: GoPublishBinary
+        configuration:
+          integrations:
+            - name: artifactory_integration

@@ -1,5 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/zuul.json",
   "definitions": {
     "JobEntry": {
       "additionalProperties": false,
@@ -8,9 +9,7 @@
           "$ref": "#/definitions/JobModel"
         }
       },
-      "required": [
-        "job"
-      ],
+      "required": ["job"],
       "title": "JobEntry",
       "type": "object"
     },
@@ -32,13 +31,7 @@
               "type": "number"
             },
             {
-              "enum": [
-                "2.7",
-                "2.8",
-                "2.9",
-                "2.10",
-                "2.11"
-              ],
+              "enum": ["2.7", "2.8", "2.9", "2.10", "2.11"],
               "type": "string"
             }
           ],
@@ -234,6 +227,27 @@
           ],
           "title": "Secrets"
         },
+        "semaphores": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/JobSemaphoreModel"
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/JobSemaphoreModel"
+                },
+                {
+                  "type": "array"
+                }
+              ]
+            }
+          ],
+          "title": "Semaphore(s)"
+        },
         "success-url": {
           "title": "Success-Url",
           "type": "string"
@@ -264,11 +278,14 @@
           "default": true,
           "title": "Voting",
           "type": "boolean"
+        },
+        "workspace-scheme": {
+          "title": "Workspace Scheme",
+          "enum": ["flat", "golang", "unique"],
+          "type": "string"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "title": "JobModel",
       "type": "object"
     },
@@ -285,9 +302,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "title": "JobDependencyModel",
       "type": "object"
     },
@@ -308,16 +323,34 @@
           "type": "string"
         }
       },
-      "required": [
-        "name",
-        "secret"
-      ],
+      "required": ["name", "secret"],
       "title": "JobSecretModel",
+      "type": "object"
+    },
+    "JobSemaphoreModel": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "resources-first": {
+          "default": false,
+          "title": "Resources-First",
+          "type": "boolean"
+        }
+      },
+      "required": ["name"],
+      "title": "JobSemaphoreModel",
       "type": "object"
     },
     "PipelineModel": {
       "additionalProperties": false,
       "properties": {
+        "fail-fast": {
+          "title": "Fail Fast",
+          "type": "boolean"
+        },
         "jobs": {
           "items": {},
           "title": "Jobs",
@@ -338,9 +371,7 @@
           "$ref": "#/definitions/ProjectModel"
         }
       },
-      "required": [
-        "project"
-      ],
+      "required": ["project"],
       "title": "ProjectEntry",
       "type": "object"
     },
@@ -374,6 +405,10 @@
         "promote": {
           "$ref": "#/definitions/PipelineModel"
         },
+        "queue": {
+          "title": "Queue",
+          "type": "string"
+        },
         "release": {
           "$ref": "#/definitions/PipelineModel"
         },
@@ -402,9 +437,7 @@
           "$ref": "#/definitions/ProjectTemplateModel"
         }
       },
-      "required": [
-        "project-template"
-      ],
+      "required": ["project-template"],
       "title": "ProjectTemplateEntry",
       "type": "object"
     },
@@ -438,6 +471,10 @@
         "promote": {
           "$ref": "#/definitions/PipelineModel"
         },
+        "queue": {
+          "title": "Queue",
+          "type": "string"
+        },
         "release": {
           "$ref": "#/definitions/PipelineModel"
         },
@@ -449,9 +486,7 @@
           "type": "object"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "title": "ProjectTemplateModel",
       "type": "object"
     },
@@ -466,9 +501,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "title": "RequiredProjectModel",
       "type": "object"
     },
@@ -479,9 +512,7 @@
           "$ref": "#/definitions/SecretModel"
         }
       },
-      "required": [
-        "secret"
-      ],
+      "required": ["secret"],
       "title": "SecretEntry",
       "type": "object"
     },
@@ -497,10 +528,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "name",
-        "data"
-      ],
+      "required": ["name", "data"],
       "title": "SecretModel",
       "type": "object"
     },
@@ -512,18 +540,12 @@
           "type": "string"
         }
       },
-      "required": [
-        "zuul"
-      ],
+      "required": ["zuul"],
       "title": "ZuulRoleModel",
       "type": "object"
     }
   },
-  "examples": [
-    "zuul.d/*.yaml",
-    "zuul-tests.d/*.yaml",
-    ".zuul.yaml"
-  ],
+  "examples": ["zuul.d/*.yaml", "zuul-tests.d/*.yaml", ".zuul.yaml"],
   "items": {
     "anyOf": [
       {

@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../schemas/json/bamboo-spec.json
+---
+version: 2
+
+#long syntax
+triggers:
+  - cron:
+      expression: 0 0 0/12 ? * *

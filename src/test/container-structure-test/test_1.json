@@ -1,72 +1,52 @@
 {
-  "schemaVersion": "2.0.0",
   "commandTests": [
     {
-      "name": "apt-get",
+      "args": ["help"],
       "command": "apt-get",
-      "args": [
-        "help"
-      ],
-      "excludedError": [
-        ".*FAIL.*"
-      ],
-      "expectedOutput": [
-        ".*Usage.*"
-      ]
+      "excludedError": [".*FAIL.*"],
+      "expectedOutput": [".*Usage.*"],
+      "name": "apt-get"
     },
     {
-      "name": "apt-config",
+      "args": ["dump"],
       "command": "apt-config",
-      "args": [
-        "dump"
-      ],
-      "expectedOutput": [
-        "APT::AutoRemove"
-      ]
+      "expectedOutput": ["APT::AutoRemove"],
+      "name": "apt-config"
     },
     {
-      "name": "path",
+      "args": ["-c", "echo $PATH"],
       "command": "sh",
-      "args": [
-        "-c",
-        "echo $PATH"
-      ],
       "expectedOutput": [
         "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      ]
+      ],
+      "name": "path"
     }
   ],
   "fileContentTests": [
     {
+      "excludedContents": [".*gce_debian_mirror.*"],
+      "expectedContents": [".*archive\\.ubuntu\\.com.*"],
       "name": "Debian Sources",
-      "excludedContents": [
-        ".*gce_debian_mirror.*"
-      ],
-      "expectedContents": [
-        ".*archive\\.ubuntu\\.com.*"
-      ],
       "path": "/etc/apt/sources.list"
     },
     {
+      "expectedContents": ["root:x:0:0:root:/root:/bin/bash"],
       "name": "Passwd file",
-      "expectedContents": [
-        "root:x:0:0:root:/root:/bin/bash"
-      ],
       "path": "/etc/passwd"
     }
   ],
   "fileExistenceTests": [
     {
+      "gid": 0,
       "name": "Root",
       "path": "/",
       "shouldExist": true,
-      "uid": 0,
-      "gid": 0
+      "uid": 0
     },
     {
+      "isExecutableBy": "owner",
       "name": "Date",
       "path": "/bin/date",
-      "isExecutableBy": "owner",
       "shouldExist": true
     },
     {
@@ -93,5 +73,6 @@
         "/usr/share/doc/dash/copyright"
       ]
     }
-  ]
+  ],
+  "schemaVersion": "2.0.0"
 }

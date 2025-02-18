@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Schema for .prettierrc",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/prettierrc.json",
   "definitions": {
     "optionsDefinition": {
       "type": "object",
@@ -30,7 +30,7 @@
           "type": "boolean"
         },
         "cursorOffset": {
-          "description": "Print (to stderr) where a cursor at the given position would move to after formatting.\nThis option cannot be used with --range-start and --range-end.",
+          "description": "Print (to stderr) where a cursor at the given position would move to after formatting.",
           "default": -1,
           "type": "integer"
         },
@@ -70,6 +70,25 @@
             }
           ]
         },
+        "experimentalOperatorPosition": {
+          "description": "Where to print operators when binary expressions wrap lines.",
+          "default": "end",
+          "oneOf": [
+            {
+              "enum": ["start"],
+              "description": "Print operators at the start of new lines."
+            },
+            {
+              "enum": ["end"],
+              "description": "Print operators at the end of previous lines."
+            }
+          ]
+        },
+        "experimentalTernaries": {
+          "description": "Use curious ternaries, with the question mark after the condition.",
+          "default": false,
+          "type": "boolean"
+        },
         "filepath": {
           "description": "Specify the input filepath. This will be used to do parser inference.",
           "type": "string"
@@ -102,48 +121,132 @@
           "default": false,
           "type": "boolean"
         },
+        "objectWrap": {
+          "description": "How to wrap object literals.",
+          "default": "preserve",
+          "oneOf": [
+            {
+              "enum": ["preserve"],
+              "description": "Keep as multi-line, if there is a newline between the opening brace and first property."
+            },
+            {
+              "enum": ["collapse"],
+              "description": "Fit to a single line when possible."
+            }
+          ]
+        },
         "parser": {
           "description": "Which parser to use.",
           "anyOf": [
-            { "enum": ["flow"], "description": "Flow" },
-            { "enum": ["babel"], "description": "JavaScript" },
-            { "enum": ["babel-flow"], "description": "Flow" },
-            { "enum": ["babel-ts"], "description": "TypeScript" },
-            { "enum": ["typescript"], "description": "TypeScript" },
-            { "enum": ["acorn"], "description": "JavaScript" },
-            { "enum": ["espree"], "description": "JavaScript" },
-            { "enum": ["meriyah"], "description": "JavaScript" },
-            { "enum": ["css"], "description": "CSS" },
-            { "enum": ["less"], "description": "Less" },
-            { "enum": ["scss"], "description": "SCSS" },
-            { "enum": ["json"], "description": "JSON" },
-            { "enum": ["json5"], "description": "JSON5" },
-            { "enum": ["json-stringify"], "description": "JSON.stringify" },
-            { "enum": ["graphql"], "description": "GraphQL" },
-            { "enum": ["markdown"], "description": "Markdown" },
-            { "enum": ["mdx"], "description": "MDX" },
-            { "enum": ["vue"], "description": "Vue" },
-            { "enum": ["yaml"], "description": "YAML" },
-            { "enum": ["glimmer"], "description": "Ember / Handlebars" },
-            { "enum": ["html"], "description": "HTML" },
-            { "enum": ["angular"], "description": "Angular" },
-            { "enum": ["lwc"], "description": "Lightning Web Components" },
-            { "type": "string", "description": "Custom parser" }
-          ]
-        },
-        "pluginSearchDirs": {
-          "description": "Custom directory that contains prettier plugins in node_modules subdirectory.\nOverrides default behavior when plugins are searched relatively to the location of Prettier.\nMultiple values are accepted.",
-          "default": [],
-          "oneOf": [
-            { "type": "array", "items": { "type": "string" } },
-            { "enum": [false], "description": "Disable plugin autoloading." }
+            {
+              "enum": ["flow"],
+              "description": "Flow"
+            },
+            {
+              "enum": ["babel"],
+              "description": "JavaScript"
+            },
+            {
+              "enum": ["babel-flow"],
+              "description": "Flow"
+            },
+            {
+              "enum": ["babel-ts"],
+              "description": "TypeScript"
+            },
+            {
+              "enum": ["typescript"],
+              "description": "TypeScript"
+            },
+            {
+              "enum": ["acorn"],
+              "description": "JavaScript"
+            },
+            {
+              "enum": ["espree"],
+              "description": "JavaScript"
+            },
+            {
+              "enum": ["meriyah"],
+              "description": "JavaScript"
+            },
+            {
+              "enum": ["css"],
+              "description": "CSS"
+            },
+            {
+              "enum": ["less"],
+              "description": "Less"
+            },
+            {
+              "enum": ["scss"],
+              "description": "SCSS"
+            },
+            {
+              "enum": ["json"],
+              "description": "JSON"
+            },
+            {
+              "enum": ["json5"],
+              "description": "JSON5"
+            },
+            {
+              "enum": ["jsonc"],
+              "description": "JSON with Comments"
+            },
+            {
+              "enum": ["json-stringify"],
+              "description": "JSON.stringify"
+            },
+            {
+              "enum": ["graphql"],
+              "description": "GraphQL"
+            },
+            {
+              "enum": ["markdown"],
+              "description": "Markdown"
+            },
+            {
+              "enum": ["mdx"],
+              "description": "MDX"
+            },
+            {
+              "enum": ["vue"],
+              "description": "Vue"
+            },
+            {
+              "enum": ["yaml"],
+              "description": "YAML"
+            },
+            {
+              "enum": ["glimmer"],
+              "description": "Ember / Handlebars"
+            },
+            {
+              "enum": ["html"],
+              "description": "HTML"
+            },
+            {
+              "enum": ["angular"],
+              "description": "Angular"
+            },
+            {
+              "enum": ["lwc"],
+              "description": "Lightning Web Components"
+            },
+            {
+              "type": "string",
+              "description": "Custom parser"
+            }
           ]
         },
         "plugins": {
           "description": "Add a plugin. Multiple plugins can be passed as separate `--plugin`s.",
           "default": [],
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "printWidth": {
           "description": "The line length where Prettier will try wrap.",
@@ -158,8 +261,14 @@
               "enum": ["always"],
               "description": "Wrap prose if it exceeds the print width."
             },
-            { "enum": ["never"], "description": "Do not wrap prose." },
-            { "enum": ["preserve"], "description": "Wrap prose as-is." }
+            {
+              "enum": ["never"],
+              "description": "Do not wrap prose."
+            },
+            {
+              "enum": ["preserve"],
+              "description": "Wrap prose as-is."
+            }
           ]
         },
         "quoteProps": {
@@ -181,12 +290,12 @@
           ]
         },
         "rangeEnd": {
-          "description": "Format code ending at a given character offset (exclusive).\nThe range will extend forwards to the end of the selected statement.\nThis option cannot be used with --cursor-offset.",
+          "description": "Format code ending at a given character offset (exclusive).\nThe range will extend forwards to the end of the selected statement.",
           "default": null,
           "type": "integer"
         },
         "rangeStart": {
-          "description": "Format code starting at a given character offset.\nThe range will extend backwards to the start of the first line containing the selected statement.\nThis option cannot be used with --cursor-offset.",
+          "description": "Format code starting at a given character offset.\nThe range will extend backwards to the start of the first line containing the selected statement.",
           "default": 0,
           "type": "integer"
         },
@@ -217,16 +326,19 @@
         },
         "trailingComma": {
           "description": "Print trailing commas wherever possible when multi-line.",
-          "default": "es5",
+          "default": "all",
           "oneOf": [
+            {
+              "enum": ["all"],
+              "description": "Trailing commas wherever possible (including function arguments)."
+            },
             {
               "enum": ["es5"],
               "description": "Trailing commas where valid in ES5 (objects, arrays, etc.)"
             },
-            { "enum": ["none"], "description": "No trailing commas." },
             {
-              "enum": ["all"],
-              "description": "Trailing commas wherever possible (including function arguments)."
+              "enum": ["none"],
+              "description": "No trailing commas."
             }
           ]
         },
@@ -255,21 +367,35 @@
               "files": {
                 "description": "Include these files in this override.",
                 "oneOf": [
-                  { "type": "string" },
-                  { "type": "array", "items": { "type": "string" } }
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 ]
               },
               "excludeFiles": {
                 "description": "Exclude these files from this override.",
                 "oneOf": [
-                  { "type": "string" },
-                  { "type": "array", "items": { "type": "string" } }
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 ]
               },
               "options": {
+                "$ref": "#/definitions/optionsDefinition",
                 "type": "object",
-                "description": "The options to apply for this override.",
-                "$ref": "#/definitions/optionsDefinition"
+                "description": "The options to apply for this override."
               }
             },
             "additionalProperties": false
@@ -282,10 +408,17 @@
     {
       "type": "object",
       "allOf": [
-        { "$ref": "#/definitions/optionsDefinition" },
-        { "$ref": "#/definitions/overridesDefinition" }
+        {
+          "$ref": "#/definitions/optionsDefinition"
+        },
+        {
+          "$ref": "#/definitions/overridesDefinition"
+        }
       ]
     },
-    { "type": "string" }
-  ]
+    {
+      "type": "string"
+    }
+  ],
+  "title": "Schema for .prettierrc"
 }

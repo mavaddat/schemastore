@@ -1,59 +1,4 @@
 {
-  "invocation": "my test app",
-  "intents": [
-    {
-      "name": "HelloWorldIntent",
-      "phrases": ["hello", "say hello", "say hello world"]
-    },
-    {
-      "name": "MyNameIsIntent",
-      "phrases": [
-        "{name}",
-        "my name is {name}",
-        "i am {name}",
-        "you can call me {name}"
-      ],
-      "dialogflow": {
-        "priority": 500000,
-        "webhookForSlotFilling": true
-      },
-      "inputs": [
-        {
-          "name": "name",
-          "type": {
-            "alexa": "AMAZON.US_FIRST_NAME",
-            "dialogflow": "@sys.given-name"
-          }
-        },
-        {
-          "name": "any",
-          "type": {
-            "dialogflow": "@sys.any"
-          },
-          "dialogflow": {
-            "isList": true
-          }
-        }
-      ]
-    }
-  ],
-  "inputTypes": [
-    {
-      "name": "myCityInputType",
-      "dialogflow": {
-        "automatedExpansion": true
-      },
-      "values": [
-        {
-          "value": "Berlin"
-        },
-        {
-          "value": "New York",
-          "synonyms": ["New York City"]
-        }
-      ]
-    }
-  ],
   "alexa": {
     "interactionModel": {
       "languageModel": {
@@ -75,31 +20,86 @@
     }
   },
   "dialogflow": {
+    "entities": [
+      {
+        "automatedExpansion": false,
+        "isEnum": false,
+        "isOverridable": true,
+        "name": "hobby"
+      }
+    ],
     "intents": [
       {
-        "name": "Default Fallback Intent",
         "auto": true,
-        "webhookUsed": true,
-        "fallbackIntent": true
+        "fallbackIntent": true,
+        "name": "Default Fallback Intent",
+        "webhookUsed": true
       },
       {
-        "name": "Default Welcome Intent",
         "auto": true,
-        "webhookUsed": true,
         "events": [
           {
             "name": "WELCOME"
           }
-        ]
-      }
-    ],
-    "entities": [
-      {
-        "name": "hobby",
-        "isOverridable": true,
-        "isEnum": false,
-        "automatedExpansion": false
+        ],
+        "name": "Default Welcome Intent",
+        "webhookUsed": true
       }
     ]
-  }
+  },
+  "inputTypes": [
+    {
+      "dialogflow": {
+        "automatedExpansion": true
+      },
+      "name": "myCityInputType",
+      "values": [
+        {
+          "value": "Berlin"
+        },
+        {
+          "synonyms": ["New York City"],
+          "value": "New York"
+        }
+      ]
+    }
+  ],
+  "intents": [
+    {
+      "name": "HelloWorldIntent",
+      "phrases": ["hello", "say hello", "say hello world"]
+    },
+    {
+      "dialogflow": {
+        "priority": 500000,
+        "webhookForSlotFilling": true
+      },
+      "inputs": [
+        {
+          "name": "name",
+          "type": {
+            "alexa": "AMAZON.US_FIRST_NAME",
+            "dialogflow": "@sys.given-name"
+          }
+        },
+        {
+          "dialogflow": {
+            "isList": true
+          },
+          "name": "any",
+          "type": {
+            "dialogflow": "@sys.any"
+          }
+        }
+      ],
+      "name": "MyNameIsIntent",
+      "phrases": [
+        "{name}",
+        "my name is {name}",
+        "i am {name}",
+        "you can call me {name}"
+      ]
+    }
+  ],
+  "invocation": "my test app"
 }

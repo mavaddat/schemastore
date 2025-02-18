@@ -1,18 +1,12 @@
 {
-  "title": "JSON schema for CircleCI configuration files",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/circleciconfig.json",
   "definitions": {
     "logical": {
-      "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nA logical statement to be used in dynamic configuration",
+      "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nA logical statement to be used in dynamic configuration",
       "oneOf": [
         {
-          "type": [
-            "string",
-            "boolean",
-            "integer",
-            "number"
-          ]
+          "type": ["string", "boolean", "integer", "number"]
         },
         {
           "type": "object",
@@ -21,29 +15,29 @@
           "maxProperties": 1,
           "properties": {
             "and": {
-              "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nLogical and: true when all statements in the list are true",
+              "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nLogical and: true when all statements in the list are true",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/logical"
               }
             },
             "or": {
-              "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nLogical or: true when at least one statements in the list is true",
+              "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nLogical or: true when at least one statements in the list is true",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/logical"
               }
             },
             "not": {
-              "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nLogical not: true when statement is false",
-              "$ref": "#/definitions/logical"
+              "$ref": "#/definitions/logical",
+              "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nLogical not: true when statement is false"
             },
             "equal": {
-              "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nTrue when all elements in the list are equal",
+              "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nTrue when all elements in the list are equal",
               "type": "array"
             },
             "matches": {
-              "description": "https://circleci.com/docs/2.0/configuration-reference/#logic-statements \n\nTrue when value matches the pattern",
+              "description": "https://circleci.com/docs/configuration-reference#logic-statements \n\nTrue when value matches the pattern",
               "type": "object",
               "additionalProperties": false,
               "properties": {
@@ -95,17 +89,17 @@
       }
     },
     "orbs": {
-      "description": "https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21\n\nOrbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.",
+      "description": "https://circleci.com/docs/configuration-reference#orbs-requires-version-21\n\nOrbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.",
       "type": "object",
       "additionalProperties": {
         "oneOf": [
           {
-            "description": "https://circleci.com/docs/2.0/creating-orbs/#semantic-versioning-in-orbs\n\nAn orb to depend on and its semver range, or volatile for the most recent release.",
+            "description": "https://circleci.com/docs/creating-orbs#semantic-versioning-in-orbs\n\nAn orb to depend on and its semver range, or volatile for the most recent release.",
             "type": "string",
             "pattern": "^[a-z][a-z0-9_-]+/[a-z][a-z0-9_-]+@(dev:[\\.a-z0-9_-]+|\\d+|\\d+\\.\\d+|\\d+\\.\\d+\\.\\d+|volatile)$"
           },
           {
-            "description": "https://circleci.com/docs/2.0/creating-orbs/#creating-inline-orbs\n\nInline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.",
+            "description": "https://circleci.com/docs/creating-orbs#creating-inline-orbs\n\nInline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.",
             "type": "object",
             "properties": {
               "orbs": {
@@ -126,10 +120,10 @@
       }
     },
     "commands": {
-      "description": "https://circleci.com/docs/2.0/configuration-reference/#commands-requires-version-21\n\nA command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.",
+      "description": "https://circleci.com/docs/configuration-reference#commands-requires-version-21\n\nA command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.",
       "type": "object",
       "additionalProperties": {
-        "description": "https://circleci.com/docs/2.0/configuration-reference/#commands-requires-version-21\n\nDefinition of a custom command.",
+        "description": "https://circleci.com/docs/configuration-reference#commands-requires-version-21\n\nDefinition of a custom command.",
         "type": "object",
         "required": ["steps"],
         "properties": {
@@ -141,13 +135,13 @@
             }
           },
           "parameters": {
-            "description": "https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration\n\nA map of parameter keys.",
+            "description": "https://circleci.com/docs/reusing-config#using-the-parameters-declaration\n\nA map of parameter keys.",
             "type": "object",
             "patternProperties": {
               "^[a-z][a-z0-9_-]+$": {
                 "oneOf": [
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#string\n\nA string parameter.",
+                    "description": "https://circleci.com/docs/reusing-config#string\n\nA string parameter.",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -163,7 +157,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#boolean\n\nA boolean parameter.",
+                    "description": "https://circleci.com/docs/reusing-config#boolean\n\nA boolean parameter.",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -179,7 +173,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#integer\n\nAn integer parameter.",
+                    "description": "https://circleci.com/docs/reusing-config#integer\n\nAn integer parameter.",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -195,7 +189,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#enum\n\nThe `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values.",
+                    "description": "https://circleci.com/docs/reusing-config#enum\n\nThe `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values.",
                     "type": "object",
                     "required": ["type", "enum"],
                     "properties": {
@@ -218,7 +212,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#executor\n\nUse an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.",
+                    "description": "https://circleci.com/docs/reusing-config#executor\n\nUse an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -234,7 +228,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#steps\n\nSteps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.",
+                    "description": "https://circleci.com/docs/reusing-config#steps\n\nSteps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -253,7 +247,7 @@
                     }
                   },
                   {
-                    "description": "https://circleci.com/docs/2.0/reusing-config/#environment-variable-name\n\nThe environment variable name parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. ",
+                    "description": "https://circleci.com/docs/reusing-config#environment-variable-name\n\nThe environment variable name parameter is a string that must match a POSIX_NAME regexp (e.g. no spaces or special characters) and is a more meaningful parameter type that enables additional checks to be performed. ",
                     "type": "object",
                     "required": ["type"],
                     "properties": {
@@ -280,161 +274,281 @@
         }
       }
     },
+    "dockerLayerCaching": {
+      "description": "Set to `true` to enable [Docker Layer Caching](https://circleci.com/docs/docker-layer-caching). Note: If you haven't already, you must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.",
+      "type": "boolean",
+      "default": "true"
+    },
     "dockerExecutor": {
-      "description": "Options for the [docker executor](https://circleci.com/docs/2.0/configuration-reference/#docker)",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["image"],
-        "properties": {
-          "image": {
-            "description": "The name of a custom docker image to use",
-            "type": "string"
-          },
-          "name": {
-            "description": "The name the container is reachable by. By default, container services are accessible through `localhost`",
-            "type": "string"
-          },
-          "entrypoint": {
-            "description": "The command used as executable when launching the container",
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "command": {
-            "description": "The command used as pid 1 (or args for entrypoint) when launching the container",
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "user": {
-            "description": "Which user to run the command as",
-            "type": "string"
-          },
-          "environment": {
-            "description": "A map of environment variable names and values",
-            "type": "object",
-            "additionalProperties": {
-              "type": ["string", "number", "boolean"]
-            }
-          },
-          "auth": {
-            "description": "Authentication for registries using standard `docker login` credentials",
+      "description": "Options for the [docker executor](https://circleci.com/docs/configuration-reference/#docker)",
+      "required": ["docker"],
+      "properties": {
+        "docker": {
+          "type": "array",
+          "items": {
             "type": "object",
             "additionalProperties": false,
+            "required": ["image"],
             "properties": {
-              "username": {
+              "image": {
+                "description": "The name of a custom docker image to use",
                 "type": "string"
               },
-              "password": {
-                "type": "string"
-              }
-            }
-          },
-          "aws_auth": {
-            "description": "Authentication for AWS EC2 Container Registry (ECR)",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aws_access_key_id": {
+              "name": {
+                "description": "The name the container is reachable by. By default, container services are accessible through `localhost`",
                 "type": "string"
               },
-              "aws_secret_access_key": {
+              "entrypoint": {
+                "description": "The command used as executable when launching the container",
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "command": {
+                "description": "The command used as pid 1 (or args for entrypoint) when launching the container",
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "user": {
+                "description": "Which user to run the command as",
                 "type": "string"
+              },
+              "environment": {
+                "description": "A map of environment variable names and values",
+                "type": "object",
+                "additionalProperties": {
+                  "type": ["string", "number", "boolean"]
+                }
+              },
+              "auth": {
+                "description": "Authentication for registries using standard `docker login` credentials",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "aws_auth": {
+                "description": "Authentication for AWS EC2 Container Registry (ECR). You can use the access/secret keys or OIDC.",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "aws_access_key_id": {
+                    "type": "string"
+                  },
+                  "aws_secret_access_key": {
+                    "type": "string"
+                  },
+                  "oidc_role_arn": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
+        },
+        "resource_class": {
+          "$ref": "#/definitions/linuxResourceClass"
         }
       }
     },
     "machineExecutor": {
-      "description": "Options for the [machine executor](https://circleci.com/docs/2.0/configuration-reference/#machine)",
+      "description": "Options for the [machine executor](https://circleci.com/docs/configuration-reference#machine)",
       "type": "object",
-      "required": ["image"],
-      "additionalProperties": false,
-      "properties": {
-        "image": {
-          "description": "The VM image to use. View [available images](https://circleci.com/docs/2.0/configuration-reference/#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing machine executor images on CircleCI installed on your servers, see our [VM Service documentation](https://circleci.com/docs/2.0/vm-service).",
-          "type": "string",
-          "default": "ubuntu-2004:current"
+      "required": ["machine"],
+      "oneOf": [
+        {
+          "properties": {
+            "machine": { "const": true },
+            "resource_class": {
+              "anyOf": [
+                { "$ref": "#/definitions/linuxResourceClass" },
+                { "$ref": "#/definitions/selfHostedRunnerResourceClass" }
+              ]
+            }
+          }
         },
-        "docker_layer_caching": {
-          "description": "Set to `true` to enable [Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching). Note: If you haven't already, you must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.",
-          "type": "boolean",
-          "default": "true"
+        {
+          "properties": {
+            "machine": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "image": { "$ref": "#/definitions/linuxMachineImage" },
+                "resource_class": {
+                  "$ref": "#/definitions/linuxResourceClass"
+                },
+                "docker_layer_caching": {
+                  "$ref": "#/definitions/dockerLayerCaching"
+                }
+              }
+            },
+            "resource_class": { "$ref": "#/definitions/linuxResourceClass" }
+          },
+          "dependencies": {
+            "resource_class": {
+              "not": {
+                "properties": {
+                  "machine": {
+                    "required": ["resource_class"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "machine": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["image"],
+              "properties": {
+                "image": { "$ref": "#/definitions/windowsMachineImage" },
+                "resource_class": {
+                  "$ref": "#/definitions/windowsResourceClass"
+                }
+              }
+            },
+            "resource_class": { "$ref": "#/definitions/windowsResourceClass" }
+          },
+          "dependencies": {
+            "resource_class": {
+              "not": {
+                "properties": {
+                  "machine": {
+                    "required": ["resource_class"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "machine": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["image"],
+              "properties": {
+                "image": { "$ref": "#/definitions/linuxGPUMachineImage" },
+                "resource_class": {
+                  "$ref": "#/definitions/linuxGPUResourceClass"
+                }
+              }
+            },
+            "resource_class": { "$ref": "#/definitions/linuxGPUResourceClass" }
+          },
+          "dependencies": {
+            "resource_class": {
+              "not": {
+                "properties": {
+                  "machine": {
+                    "required": ["resource_class"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "machine": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["image"],
+              "properties": {
+                "image": { "$ref": "#/definitions/windowsGPUMachineImage" },
+                "resource_class": {
+                  "$ref": "#/definitions/windowsGPUResourceClass"
+                }
+              }
+            },
+            "resource_class": {
+              "$ref": "#/definitions/windowsGPUResourceClass"
+            }
+          },
+          "dependencies": {
+            "resource_class": {
+              "not": {
+                "properties": {
+                  "machine": {
+                    "required": ["resource_class"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "machine": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["resource_class"],
+              "properties": {
+                "resource_class": {
+                  "$ref": "#/definitions/selfHostedRunnerResourceClass"
+                }
+              }
+            }
+          }
         }
-      }
+      ]
     },
     "macosExecutor": {
-      "description": "Options for the [macOS executor](https://circleci.com/docs/2.0/configuration-reference/#macos)",
+      "description": "Options for the [macOS executor](https://circleci.com/docs/configuration-reference#macos)",
       "type": "object",
-      "additionalProperties": false,
-      "required": ["xcode"],
+      "required": ["macos"],
       "properties": {
-        "xcode": {
-          "description": "The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions) document for the complete list.",
-          "oneOf": [
-            { "type": "number" },
-            { "type": "string", "minimum": 0 }
-          ]
+        "macos": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["xcode"],
+          "properties": {
+            "xcode": {
+              "$ref": "#/definitions/xcodeVersion"
+            }
+          }
+        },
+        "resource_class": {
+          "$ref": "#/definitions/macOSResourceClass"
         }
       }
     },
     "executorChoice": {
+      "type": "object",
       "oneOf": [
         {
-          "type": "object",
-          "required": ["docker"],
-          "properties": {
-            "docker": {
-              "$ref": "#/definitions/dockerExecutor"
-            }
-          }
+          "$ref": "#/definitions/dockerExecutor"
         },
         {
-          "type": "object",
-          "required": ["machine"],
-          "properties": {
-            "machine": {
-              "$ref": "#/definitions/machineExecutor"
-            }
-          }
+          "$ref": "#/definitions/machineExecutor"
         },
         {
-          "type": "object",
-          "required": ["machine"],
-          "properties": {
-            "machine": {
-              "description": "Use the default machine executor image",
-              "type": "boolean"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": ["macos"],
-          "properties": {
-            "macos": {
-              "$ref": "#/definitions/macosExecutor"
-            }
-          }
+          "$ref": "#/definitions/macosExecutor"
         }
       ]
     },
@@ -442,17 +556,11 @@
       "description": "Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.",
       "type": "object",
       "additionalProperties": {
-        "type": "object",
         "$ref": "#/definitions/executorChoice",
+        "type": "object",
         "properties": {
-          "resource_class": {
-            "description": "Amount of CPU and RAM allocated to each container in a job. Note: A performance plan is required to access this feature.",
-            "type": "string",
-            "default": "medium",
-            "enum": ["small", "medium", "medium+", "large", "xlarge", "2xlarge", "2xlarge+", "gpu.nvidia.small", "gpu.nvidia.medium", "windows.gpu.nvidia.medium", "macos.x86.medium.gen2", "macos.x86.metal.gen1"]
-          },
           "shell": {
-            "description": "Shell to use for execution command in all steps. Can be overridden by shell in each step (default: See [Default Shell Options](https://circleci.com/docs/2.0/configuration-reference/#default-shell-options)",
+            "description": "Shell to use for execution command in all steps. Can be overridden by shell in each step (default: See [Default Shell Options](https://circleci.com/docs/configuration-reference#default-shell-options)",
             "type": "string"
           },
           "working_directory": {
@@ -472,43 +580,43 @@
     "builtinSteps": {
       "documentation": {
         "run": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#run\n\nUsed for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command."
+          "description": "https://circleci.com/docs/configuration-reference#run\n\nUsed for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command."
         },
         "checkout": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#checkout\n\nSpecial step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh."
+          "description": "https://circleci.com/docs/configuration-reference#checkout\n\nSpecial step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh."
         },
         "setup_remote_docker": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#setup_remote_docker\n\nCreates a remote Docker environment configured to execute Docker commands."
+          "description": "https://circleci.com/docs/configuration-reference#setup_remote_docker\n\nCreates a remote Docker environment configured to execute Docker commands."
         },
         "save_cache": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#save_cache\n\nGenerates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can restore this cache using the `restore_cache` step."
+          "description": "https://circleci.com/docs/configuration-reference#save_cache\n\nGenerates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can restore this cache using the `restore_cache` step."
         },
         "restore_cache": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#restore_cache\n\nRestores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the `save_cache` step."
+          "description": "https://circleci.com/docs/configuration-reference#restore_cache\n\nRestores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the `save_cache` step."
         },
         "deploy": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#deploy\n\nSpecial step for deploying artifacts. `deploy` uses the same configuration map and semantics as run step. Jobs may have more than one deploy step. In general deploy step behaves just like run with two exceptions:\n* In a job with parallelism, the deploy step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.\n* In a job that runs with SSH, the deploy step will not execute"
+          "description": "https://circleci.com/docs/configuration-reference#deploy\n\nSpecial step for deploying artifacts. `deploy` uses the same configuration map and semantics as run step. Jobs may have more than one deploy step. In general deploy step behaves just like run with two exceptions:\n* In a job with parallelism, the deploy step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.\n* In a job that runs with SSH, the deploy step will not execute"
         },
         "store_artifacts": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#store_artifacts\n\nStep to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API."
+          "description": "https://circleci.com/docs/configuration-reference#store_artifacts\n\nStep to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API."
         },
         "store_test_results": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#store_test_results\n\nSpecial step used to upload test results so they display in builds’ Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use the `store_artifacts` step."
+          "description": "https://circleci.com/docs/configuration-reference#storetestresults\n\nSpecial step used to upload test results so they display in builds' Test Summary section and can be used for timing analysis. To also see test result as build artifacts, please use the `store_artifacts` step."
         },
         "persist_to_workspace": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#persist_to_workspace\n\nSpecial step used to persist a temporary file to be used by another job in the workflow"
+          "description": "https://circleci.com/docs/configuration-reference#persist_to_workspace\n\nSpecial step used to persist a temporary file to be used by another job in the workflow"
         },
         "attach_workspace": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#attach_workspace\n\nSpecial step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at."
+          "description": "https://circleci.com/docs/configuration-reference#attach_workspace\n\nSpecial step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at."
         },
         "add_ssh_keys": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#add_ssh_keys\n\nSpecial step that adds SSH keys from a project’s settings to a container. Also configures SSH to use these keys."
+          "description": "https://circleci.com/docs/configuration-reference#add_ssh_keys\n\nSpecial step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys."
         },
         "when": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21 \n\nConditional step to run on custom conditions (determined at config-compile time) that are checked before a workflow runs"
+          "description": "https://circleci.com/docs/configuration-reference#the-when-step-requires-version-21 \n\nConditional step to run on custom conditions (determined at config-compile time) that are checked before a workflow runs"
         },
         "unless": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21 \n\nConditional step to run when custom conditions aren't met (determined at config-compile time) that are checked before a workflow runs"
+          "description": "https://circleci.com/docs/configuration-reference#the-when-step-requires-version-21 \n\nConditional step to run when custom conditions aren't met (determined at config-compile time) that are checked before a workflow runs"
         }
       },
       "configuration": {
@@ -583,7 +691,7 @@
               "type": "string"
             },
             "path": {
-              "description": "Checkout directory (default: job’s `working_directory`)",
+              "description": "Checkout directory (default: job's `working_directory`)",
               "type": "string"
             }
           }
@@ -608,20 +716,27 @@
             },
             "version": {
               "description": "If your build requires a specific docker image, you can set it as an image attribute",
-              "enum": [
-                "20.10.12",
-                "20.10.11",
-                "20.10.7",
-                "20.10.6",
-                "20.10.2",
-                "19.03.14",
-                "19.03.13",
-                "19.03.12",
-                "19.03.8",
-                "18.09.3",
-                "17.09.0-ce"
-              ],
-              "default": "20.10.12"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "20.10.24",
+                    "20.10.23",
+                    "20.10.18",
+                    "20.10.17",
+                    "20.10.14",
+                    "20.10.12",
+                    "20.10.11",
+                    "20.10.7",
+                    "20.10.6",
+                    "20.10.2",
+                    "19.03.13"
+                  ]
+                },
+                {
+                  "type": "string"
+                }
+              ]
             }
           }
         },
@@ -882,12 +997,12 @@
           "enum": ["add_ssh_keys"]
         },
         {
-          "description": "https://circleci.com/docs/2.0/reusing-config/#invoking-reusable-commands\n\nA custom command defined via the top level commands key",
+          "description": "https://circleci.com/docs/reusing-config#invoking-reusable-commands\n\nA custom command defined via the top level commands key",
           "type": "string",
           "pattern": "^[a-z][a-z0-9_-]+$"
         },
         {
-          "description": "https://circleci.com/docs/2.0/using-orbs/#commands\n\nA custom command defined via an orb.",
+          "description": "https://circleci.com/docs/using-orbs#commands\n\nA custom command defined via an orb.",
           "type": "string",
           "pattern": "^[a-z][a-z0-9_-]+/[a-z][a-z0-9_-]+$"
         },
@@ -938,10 +1053,10 @@
           },
           "patternProperties": {
             "^[a-z][a-z0-9_-]+$": {
-              "description": "https://circleci.com/docs/2.0/reusing-config/#invoking-reusable-commands\n\nA custom command defined via the top level commands key"
+              "description": "https://circleci.com/docs/reusing-config#invoking-reusable-commands\n\nA custom command defined via the top level commands key"
             },
             "^[a-z][a-z0-9_-]+/[a-z][a-z0-9_-]+$": {
-              "description": "https://circleci.com/docs/2.0/using-orbs/#commands\n\nA custom command defined via an orb."
+              "description": "https://circleci.com/docs/using-orbs#commands\n\nA custom command defined via an orb."
             }
           }
         }
@@ -956,8 +1071,43 @@
           "description": "Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.",
           "type": "array",
           "items": {
-            "type": "string"
+            "oneOf": [
+              {
+                "description": "A dependency defined by their job name.",
+                "type": "string"
+              },
+              {
+                "description": "A dependency defined by their job name, and required statuses.",
+                "type": "object",
+                "minProperties": 1,
+                "maxProperties": 1,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z\\s\\d_-]*$": {
+                    "oneOf": [
+                      {
+                        "description": "A status that the job must have to satisfy the dependency.",
+                        "type": "string",
+                        "enum": ["success", "failed", "canceled"]
+                      },
+                      {
+                        "description": "A list of statuses that the job must have one of to satisfy the dependency.",
+                        "type": "array",
+                        "minLength": 1,
+                        "items": {
+                          "type": "string",
+                          "enum": ["success", "failed", "canceled"]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
           }
+        },
+        "name": {
+          "description": "The name key can be used to ensure build numbers are not appended when invoking the same job multiple times (e.g., sayhello-1, sayhello-2). The name assigned needs to be unique, otherwise numbers will still be appended to the job name",
+          "type": "string"
         },
         "context": {
           "description": "Either a single context name, or a list of contexts. The default name is `org-global`",
@@ -992,7 +1142,7 @@
           }
         },
         "matrix": {
-          "description": "https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21\n\nThe matrix stanza allows you to run a parameterized job multiple times with different arguments.",
+          "description": "https://circleci.com/docs/configuration-reference#matrix-requires-version-21\n\nThe matrix stanza allows you to run a parameterized job multiple times with different arguments.",
           "type": "object",
           "additionalProperties": false,
           "required": ["parameters"],
@@ -1012,7 +1162,7 @@
               }
             },
             "alias": {
-              "description": "An alias for the matrix, usable from another job’s requires stanza. Defaults to the name of the job being executed",
+              "description": "An alias for the matrix, usable from another job's requires stanza. Defaults to the name of the job being executed",
               "type": "string"
             }
           }
@@ -1024,7 +1174,7 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "#/definitions/executorChoice"
           },
@@ -1103,11 +1253,205 @@
           }
         }
       }
+    },
+    "linuxResourceClass": {
+      "description": "Amount of CPU and RAM allocated for each job. View available resource classes for [x86](https://circleci.com/docs/configuration-reference/#docker-execution-environment) or [ARM](https://circleci.com/docs/configuration-reference/#arm-execution-environment-linux).",
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "medium+",
+        "large",
+        "xlarge",
+        "2xlarge",
+        "2xlarge+",
+        "arm.medium",
+        "arm.large",
+        "arm.xlarge",
+        "arm.2xlarge"
+      ]
+    },
+    "linuxMachineImage": {
+      "description": "The LinuxVM image to use. View available images for [Ubuntu 20.04](https://circleci.com/developer/machine/image/ubuntu-2004), [Ubuntu 22.04](https://circleci.com/developer/machine/image/ubuntu-2204), or [Android](https://circleci.com/developer/machine/image/android). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing machine executor images on CircleCI installed on your servers, see our [VM Service documentation](https://circleci.com/docs/vm-service).",
+      "type": "string",
+      "enum": [
+        "ubuntu-2004:2024.08.1",
+        "ubuntu-2004:2024.05.1",
+        "ubuntu-2004:2024.04.4",
+        "ubuntu-2004:2024.01.2",
+        "ubuntu-2004:2024.01.1",
+        "ubuntu-2004:2023.10.1",
+        "ubuntu-2004:2023.07.1",
+        "ubuntu-2004:2023.04.2",
+        "ubuntu-2004:2023.04.1",
+        "ubuntu-2004:2023.02.1",
+        "ubuntu-2004:2022.10.1",
+        "ubuntu-2004:2022.07.1",
+        "ubuntu-2004:2022.04.2",
+        "ubuntu-2004:2022.04.1",
+        "ubuntu-2004:202201-02",
+        "ubuntu-2004:202201-01",
+        "ubuntu-2004:202111-02",
+        "ubuntu-2004:202111-01",
+        "ubuntu-2004:202107-02",
+        "ubuntu-2004:202104-01",
+        "ubuntu-2004:202101-01",
+        "ubuntu-2004:202010-01",
+        "ubuntu-2004:current",
+        "ubuntu-2004:edge",
+        "ubuntu-2204:2024.08.1",
+        "ubuntu-2204:2024.05.1",
+        "ubuntu-2204:2024.04.4",
+        "ubuntu-2204:2024.01.2",
+        "ubuntu-2204:2024.01.1",
+        "ubuntu-2204:2023.10.1",
+        "ubuntu-2204:2023.07.2",
+        "ubuntu-2204:2023.04.2",
+        "ubuntu-2204:2023.04.1",
+        "ubuntu-2204:2023.02.1",
+        "ubuntu-2204:2022.10.2",
+        "ubuntu-2204:2022.10.1",
+        "ubuntu-2204:2022.07.2",
+        "ubuntu-2204:2022.07.1",
+        "ubuntu-2204:2022.04.2",
+        "ubuntu-2204:2022.04.1",
+        "ubuntu-2204:current",
+        "ubuntu-2204:edge",
+        "ubuntu-2404:2024.08.1",
+        "ubuntu-2404:2024.05.1",
+        "ubuntu-2404:current",
+        "ubuntu-2404:edge",
+        "android:2024.04.1",
+        "android:2024.01.1",
+        "android:2023.11.1",
+        "android:2023.10.1",
+        "android:2023.09.1",
+        "android:2023.08.1",
+        "android:2023.07.1",
+        "android:2023.06.1",
+        "android:2023.05.1",
+        "android:2023.04.1",
+        "android:2023.03.1",
+        "android:2023.02.1",
+        "android:2022.12.1",
+        "android:2022.09.1",
+        "android:2022.08.1",
+        "android:2022.07.1",
+        "android:2022.06.2",
+        "android:2022.06.1",
+        "android:2022.04.1",
+        "android:2022.03.1",
+        "android:2022.01.1",
+        "android:2021.12.1",
+        "android:2021.10.1",
+        "android:202102-01"
+      ]
+    },
+    "windowsResourceClass": {
+      "description": "Amount of CPU and RAM allocated for each job. View [available resource classes](https://circleci.com/docs/configuration-reference/#windows-execution-environment).",
+      "type": "string",
+      "enum": [
+        "windows.medium",
+        "windows.large",
+        "windows.xlarge",
+        "windows.2xlarge"
+      ]
+    },
+    "windowsMachineImage": {
+      "description": "The Windows machine image to use. View available images for [Windows Server 2022](https://circleci.com/developer/machine/image/windows-server-2022-gui) or [Windows Server 2019](https://circleci.com/developer/machine/image/windows-server-2019).",
+      "type": "string",
+      "enum": [
+        "windows-server-2019-vs2019:2024.05.1",
+        "windows-server-2019-vs2019:2024.01.1",
+        "windows-server-2019-vs2019:2023.10.1",
+        "windows-server-2019-vs2019:2023.08.1",
+        "windows-server-2019-vs2019:2023.04.1",
+        "windows-server-2019-vs2019:2022.08.1",
+        "windows-server-2019-vs2019:current",
+        "windows-server-2019-vs2019:edge",
+        "windows-server-2022-gui:2024.04.1",
+        "windows-server-2022-gui:2024.01.1",
+        "windows-server-2022-gui:2023.11.1",
+        "windows-server-2022-gui:2023.10.1",
+        "windows-server-2022-gui:2023.09.1",
+        "windows-server-2022-gui:2023.08.1",
+        "windows-server-2022-gui:2023.07.1",
+        "windows-server-2022-gui:2023.06.1",
+        "windows-server-2022-gui:2023.05.1",
+        "windows-server-2022-gui:2023.04.1",
+        "windows-server-2022-gui:2023.03.1",
+        "windows-server-2022-gui:2022.08.1",
+        "windows-server-2022-gui:2022.07.1",
+        "windows-server-2022-gui:2022.06.1",
+        "windows-server-2022-gui:2022.04.1",
+        "windows-server-2022-gui:current",
+        "windows-server-2022-gui:edge"
+      ]
+    },
+    "linuxGPUResourceClass": {
+      "description": "Amount of CPU and RAM allocated for each job. View [available resource classes](https://circleci.com/docs/configuration-reference/#gpu-execution-environment-linux).",
+      "type": "string",
+      "enum": [
+        "gpu.nvidia.small.gen2",
+        "gpu.nvidia.small.multi",
+        "gpu.nvidia.medium.multi",
+        "gpu.nvidia.medium",
+        "gpu.nvidia.large"
+      ]
+    },
+    "linuxGPUMachineImage": {
+      "description": "The Linux GPU machine image to use. View available images for [CUDA 11](https://circleci.com/developer/machine/image/linux-cuda-11) or [CUDA 12](https://circleci.com/developer/machine/image/linux-cuda-12).",
+      "type": "string",
+      "enum": [
+        "linux-cuda-11:default",
+        "linux-cuda-11:edge",
+        "linux-cuda-12:default",
+        "linux-cuda-12:edge"
+      ]
+    },
+    "windowsGPUResourceClass": {
+      "description": "Amount of CPU and RAM allocated for each job. View [available resource classes](https://circleci.com/docs/configuration-reference/#gpu-execution-environment-windows).",
+      "type": "string",
+      "enum": ["windows.gpu.nvidia.medium"]
+    },
+    "windowsGPUMachineImage": {
+      "description": "The Windows GPU machine image to use. View [available images](https://circleci.com/developer/machine/image/windows-server-2019-cuda).",
+      "type": "string",
+      "enum": [
+        "windows-server-2019-cuda:current",
+        "windows-server-2019-cuda:edge"
+      ]
+    },
+    "macOSResourceClass": {
+      "description": "Amount of CPU and RAM allocated for each job. View [available resource classes](https://circleci.com/docs/configuration-reference/#macos-execution-environment).",
+      "type": "string",
+      "enum": ["macos.m1.medium.gen1", "macos.m1.large.gen1"]
+    },
+    "xcodeVersion": {
+      "description": "The version of Xcode to use. View [available versions](https://circleci.com/developer/machine/image/xcode)",
+      "type": "string",
+      "enum": [
+        "16.2.0",
+        "16.1.0",
+        "16.0.0",
+        "15.4.0",
+        "15.3.0",
+        "15.2.0",
+        "15.1.0",
+        "15.0.0",
+        "14.3.1",
+        "14.2.0",
+        "14.1.0",
+        "14.0.1",
+        "13.4.1",
+        "12.5.1"
+      ]
+    },
+    "selfHostedRunnerResourceClass": {
+      "type": "string",
+      "pattern": "^[^/\\s]+/\\S+$"
     }
   },
-
-  "type": "object",
-  "required": ["version"],
   "properties": {
     "version": {
       "description": "The version field is intended to be used in order to issue warnings for deprecation or breaking changes.",
@@ -1124,7 +1468,10 @@
       "$ref": "#/definitions/executors"
     },
     "jobs": {
-      "$ref": "#/definitions/jobs"
+      "$ref": "#/definitions/jobs",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z\\s\\d_-]*$"
+      }
     },
     "workflows": {
       "description": "Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value",
@@ -1179,23 +1526,26 @@
                 {
                   "type": "object",
                   "additionalProperties": {
-                    "type": "object",
-                    "$ref": "#/definitions/jobRef"
+                    "$ref": "#/definitions/jobRef",
+                    "type": "object"
                   }
                 }
               ]
             }
           },
           "when": {
-            "description": "Specify when to run the workflow.",
-            "$ref": "#/definitions/logical"
+            "$ref": "#/definitions/logical",
+            "description": "Specify when to run the workflow."
           },
           "unless": {
-            "description": "Specify when *not* to run the workflow.",
-            "$ref": "#/definitions/logical"
+            "$ref": "#/definitions/logical",
+            "description": "Specify when *not* to run the workflow."
           }
         }
       }
     }
-  }
+  },
+  "required": ["version"],
+  "title": "JSON schema for CircleCI configuration files",
+  "type": "object"
 }

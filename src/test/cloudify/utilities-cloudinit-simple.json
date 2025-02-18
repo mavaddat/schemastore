@@ -1,13 +1,9 @@
 {
-  "tosca_definitions_version": "cloudify_dsl_1_3",
   "imports": [
     "http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml",
     "plugin:cloudify-utilities-plugin"
   ],
   "inputs": {
-    "user": {
-      "default": "centos"
-    },
     "group": {
       "default": "wheel"
     },
@@ -15,14 +11,34 @@
       "default": "/bin/bash"
     },
     "sudo": {
-      "default": [
-        "ALL=(ALL) NOPASSWD:ALL"
-      ]
+      "default": ["ALL=(ALL) NOPASSWD:ALL"]
+    },
+    "user": {
+      "default": "centos"
     }
   },
   "node_templates": {
     "user": {
-      "type": "cloudify.nodes.CloudInit.CloudConfig",
+      "interfaces": {
+        "cloudify.interfaces.lifecycle": {
+          "create": {
+            "inputs": {
+              "resource_config": {
+                "packages": [
+                  ["epel-release"],
+                  ["python-wheel"],
+                  ["python-pip"],
+                  ["python-setuptools"],
+                  ["gcc"],
+                  ["python-devel"],
+                  ["libffi-devel"],
+                  ["openssl-devel"]
+                ]
+              }
+            }
+          }
+        }
+      },
       "properties": {
         "resource_config": {
           "users": [
@@ -43,42 +59,8 @@
           ]
         }
       },
-      "interfaces": {
-        "cloudify.interfaces.lifecycle": {
-          "create": {
-            "inputs": {
-              "resource_config": {
-                "packages": [
-                  [
-                    "epel-release"
-                  ],
-                  [
-                    "python-wheel"
-                  ],
-                  [
-                    "python-pip"
-                  ],
-                  [
-                    "python-setuptools"
-                  ],
-                  [
-                    "gcc"
-                  ],
-                  [
-                    "python-devel"
-                  ],
-                  [
-                    "libffi-devel"
-                  ],
-                  [
-                    "openssl-devel"
-                  ]
-                ]
-              }
-            }
-          }
-        }
-      }
+      "type": "cloudify.nodes.CloudInit.CloudConfig"
     }
-  }
+  },
+  "tosca_definitions_version": "cloudify_dsl_1_3"
 }

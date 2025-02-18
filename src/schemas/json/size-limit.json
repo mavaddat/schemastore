@@ -1,7 +1,7 @@
 {
-  "$schema": "http://json-schema.org/schema",
-  "title": "JSON Schema for configuration for size-limit",
-  "type": "array",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/size-limit.json",
+  "default": [],
   "items": {
     "title": "Configuration Section",
     "allOf": [
@@ -137,6 +137,7 @@
       }
     ]
   },
-  "uniqueItems": true,
-  "default": []
+  "title": "JSON Schema for configuration for size-limit",
+  "type": "array",
+  "uniqueItems": true
 }

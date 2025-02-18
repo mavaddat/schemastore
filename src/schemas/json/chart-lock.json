@@ -1,9 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Helm Chart.lock",
-  "type": "object",
+  "$id": "https://json.schemastore.org/chart-lock.json",
   "additionalProperties": false,
-  "required": ["generated", "digest", "dependencies"],
   "properties": {
     "generated": {
       "description": "Generated is the date the lock file was last generated.",
@@ -38,5 +36,8 @@
         }
       }
     }
-  }
+  },
+  "required": ["generated", "digest", "dependencies"],
+  "title": "Helm Chart.lock",
+  "type": "object"
 }

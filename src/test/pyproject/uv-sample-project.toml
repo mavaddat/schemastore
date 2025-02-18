@@ -1,0 +1,5 @@
+#:schema ../../schemas/json/pyproject.json
+[tool.uv]
+
+[tool.uv.pip]
+index-url = "https://test.pypi.org/simple"

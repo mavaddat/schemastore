@@ -1,8 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Http-mocker configuration.",
+  "$id": "https://json.schemastore.org/httpmockrc.json",
   "description": "A tool for mock local requests or proxy remote requests.",
-  "type": "object",
   "properties": {
     "mockFileName": {
       "default": "mocks",
@@ -51,5 +50,7 @@
       }
     }
   },
-  "required": ["mockFileName", "routes"]
+  "required": ["mockFileName", "routes"],
+  "title": "Http-mocker configuration.",
+  "type": "object"
 }

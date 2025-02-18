@@ -1,12 +1,12 @@
 {
-    "disabled": false,
-    "bindings": [
-        {
-            "name": "myQueueItem",
-            "type": "serviceBusTrigger",
-            "direction": "in",
-            "queueName": "myqueue",
-            "connection": ""
-        }
-    ]
+  "bindings": [
+    {
+      "connection": "",
+      "direction": "in",
+      "name": "myQueueItem",
+      "queueName": "myqueue",
+      "type": "serviceBusTrigger"
+    }
+  ],
+  "disabled": false
 }

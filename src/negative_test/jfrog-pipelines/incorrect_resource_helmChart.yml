@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+resources:
+  - name: HelmChartResource
+    type: HelmChart
+    configuration:
+      repository: artifactory

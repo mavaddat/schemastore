@@ -1,47 +1,45 @@
 {
-  "updateId": {
-    "provider": "Contoso",
-    "name": "ADU",
-    "version": "1.0"
-  },
-  "description": "Example update",
   "compatibility": [
     {
       "deviceManufacturer": "Contoso",
       "deviceModel": "Toaster"
     }
   ],
+  "createdDateTime": "2020-10-02T22:18:04.9446744Z",
+  "description": "Example update",
+  "files": [
+    {
+      "filename": "configure.sh",
+      "hashes": {
+        "sha256": "mcB5SexMU4JOOzqmlJqKbue9qMskWY3EI/iVjJxCtAs="
+      },
+      "sizeInBytes": 718
+    }
+  ],
   "instructions": {
     "steps": [
       {
         "description": "pre-install script",
+        "files": ["configure.sh"],
         "handler": "microsoft/script:1",
         "handlerProperties": {
           "arguments": "--pre-install"
-        },
-        "files": [
-          "configure.sh"
-        ]
+        }
       },
       {
         "type": "reference",
         "updateId": {
-          "provider": "Contoso",
           "name": "Sensor",
+          "provider": "Contoso",
           "version": "1.0"
         }
       }
     ]
   },
-  "files": [
-    {
-      "filename": "configure.sh",
-      "sizeInBytes": 718,
-      "hashes": {
-        "sha256": "mcB5SexMU4JOOzqmlJqKbue9qMskWY3EI/iVjJxCtAs="
-      }
-    }
-  ],
   "manifestVersion": "4.0",
-  "createdDateTime": "2020-10-02T22:18:04.9446744Z"
+  "updateId": {
+    "name": "ADU",
+    "provider": "Contoso",
+    "version": "1.0"
+  }
 }

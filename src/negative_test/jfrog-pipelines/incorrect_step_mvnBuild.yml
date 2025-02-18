@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+pipelines:
+  - name: test_pipeline_1
+    steps:
+      - name: mvnBuild_sample
+        type: MvnBuild
+        random: true
+        execution:
+          onStart:
+            - mvn --version
