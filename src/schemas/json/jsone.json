@@ -1,16 +1,13 @@
 {
-  "$id": "https://www.sourcemeta.com/schemas/vendor/json-e@1.json",
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "title": "JSON-e templates",
+  "$id": "https://www.sourcemeta.com/schemas/vendor/json-e@1.json",
   "$comment": "https://json-e.js.org",
-  "type": "object",
-  "additionalProperties": {
-    "$ref": "#/$defs/jsone-value"
-  },
   "$defs": {
     "jsone-value": {
       "oneOf": [
-        { "$ref": "#" },
+        {
+          "$ref": "#"
+        },
         {
           "type": "array",
           "items": {
@@ -18,7 +15,7 @@
           }
         },
         {
-          "type": [ "null", "boolean", "number", "string", "integer" ]
+          "type": ["null", "boolean", "number", "string", "integer"]
         }
       ]
     },
@@ -35,21 +32,15 @@
       }
     }
   },
+  "additionalProperties": {
+    "$ref": "#/$defs/jsone-value"
+  },
   "properties": {
-    "$eval": {
-      "type": "string"
-    },
-    "$json": {
-      "$ref": "#/$defs/jsone-value"
-    },
-    "$if": {
-      "type": "string"
-    },
-    "$then": {
-      "$ref": "#/$defs/jsone-value"
-    },
     "$else": {
       "$ref": "#/$defs/jsone-value"
+    },
+    "$eval": {
+      "type": "string"
     },
     "$flatten": {
       "$ref": "#/$defs/jsone-array"
@@ -60,29 +51,40 @@
     "$fromNow": {
       "type": "string"
     },
+    "$if": {
+      "type": "string"
+    },
+    "$json": {
+      "$ref": "#/$defs/jsone-value"
+    },
     "$let": {
       "type": "object",
       "additionalProperties": {
-        "additionalProperties": { "$ref": "#" }
+        "additionalProperties": {
+          "$ref": "#"
+        }
       }
-    },
-    "in": {
-      "$ref": "#"
     },
     "$map": {
       "$ref": "#/$defs/jsone-array"
     },
-    "$match": { "$ref": "#" },
-    "$switch": { "$ref": "#" },
+    "$match": {
+      "$ref": "#"
+    },
     "$merge": {
       "$ref": "#/$defs/jsone-object-array"
     },
     "$mergeDeep": {
       "$ref": "#/$defs/jsone-object-array"
     },
+    "$reverse": {
+      "$ref": "#"
+    },
     "$sort": {
       "anyOf": [
-        { "$ref": "#" },
+        {
+          "$ref": "#"
+        },
         {
           "type": "array",
           "items": {
@@ -91,8 +93,16 @@
         }
       ]
     },
-    "$reverse": {
+    "$switch": {
+      "$ref": "#"
+    },
+    "$then": {
+      "$ref": "#/$defs/jsone-value"
+    },
+    "in": {
       "$ref": "#"
     }
-  }
+  },
+  "title": "JSON-e templates",
+  "type": "object"
 }

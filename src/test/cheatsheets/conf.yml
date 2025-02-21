@@ -1,5 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/cheatsheets.json
 cheatpaths:
   - name: Sample
     path: Sample
-    tags: ["Sample1", "Sample2"]
+    tags: ['Sample1', 'Sample2']
     readonly: true

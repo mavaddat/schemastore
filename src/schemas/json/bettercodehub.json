@@ -1,9 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/bettercodehub.json",
   "$comment": "https://www.bettercodehub.com/docs/configuration-manual",
-  "title": "Better Code Hub",
-  "description": "Configuration file for Better Code Hub to override the default configuration.",
-  "type": "object",
   "additionalProperties": false,
   "definitions": {
     "supportedProgrammingLanguage": {
@@ -56,6 +54,7 @@
       }
     }
   },
+  "description": "Configuration file for Better Code Hub to override the default configuration.",
   "properties": {
     "component_depth": {
       "title": "Component Depth",
@@ -75,16 +74,16 @@
             "additionalProperties": false,
             "properties": {
               "name": {
-                "title": "Name",
-                "$ref": "#/definitions/supportedProgrammingLanguage"
+                "$ref": "#/definitions/supportedProgrammingLanguage",
+                "title": "Name"
               },
               "production": {
-                "title": "Production",
-                "$ref": "#/definitions/fileFilter"
+                "$ref": "#/definitions/fileFilter",
+                "title": "Production"
               },
               "test": {
-                "title": "Test",
-                "$ref": "#/definitions/fileFilter"
+                "$ref": "#/definitions/fileFilter",
+                "title": "Test"
               }
             }
           }
@@ -94,5 +93,7 @@
     "exclude": {
       "$ref": "#/definitions/excludeFileFilter"
     }
-  }
+  },
+  "title": "Better Code Hub",
+  "type": "object"
 }

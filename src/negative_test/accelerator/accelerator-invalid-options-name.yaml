@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../../schemas/json/accelerator.json
+accelerator:
+  displayName: Hello
+  options:
+    - name: not-camel-case
+      display: true
+      dataType: string

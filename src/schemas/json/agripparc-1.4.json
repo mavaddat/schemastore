@@ -1,9 +1,13 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "title": "JSON schema for the Agrippa config file",
-  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "additionalProperties": false,
+  "id": "https://json.schemastore.org/agripparc-1.4.json",
   "properties": {
+    "$schema": {
+      "description": "Link to https://json.schemastore.org/agripparc-1.4.json",
+      "type": "string",
+      "enum": ["https://json.schemastore.org/agripparc-1.4.json"]
+    },
     "props": {
       "description": "Which prop declaration method to use",
       "type": "string",
@@ -14,7 +18,7 @@
       "type": "boolean"
     },
     "typescript": {
-      "description": "Wether to use Typescript",
+      "description": "Whether to use Typescript",
       "type": "boolean"
     },
     "flat": {
@@ -24,7 +28,15 @@
     "styling": {
       "description": "Which styling solution to use",
       "type": "string",
-      "enum": ["css", "scss", "jss", "mui", "react-native", "styled-components", "none"]
+      "enum": [
+        "css",
+        "scss",
+        "jss",
+        "mui",
+        "react-native",
+        "styled-components",
+        "none"
+      ]
     },
     "stylingModule": {
       "description": "Relevant for `css` or `scss` styling. If true, generates a scoped `module` stylesheet",
@@ -83,11 +95,8 @@
     "debug": {
       "description": "Whether to log additional debug information",
       "type": "boolean"
-    },
-    "$schema": {
-      "description": "Link to https://json.schemastore.org/agripparc-1.4.json",
-      "type": "string",
-      "enum": ["https://json.schemastore.org/agripparc-1.4.json"]
     }
-  }
+  },
+  "title": "JSON schema for the Agrippa config file",
+  "type": "object"
 }

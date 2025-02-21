@@ -1,37 +1,37 @@
 {
-  "updateId": {
-    "provider": "Contoso",
-    "name": "Toaster",
-    "version": "1.0"
-  },
   "compatibility": [
     {
-      "deviceModel": "Toaster",
-      "deviceManufacturer": "Contoso"
+      "deviceManufacturer": "Contoso",
+      "deviceModel": "Toaster"
     }
   ],
+  "createdDateTime": "2022-01-19T22:02:33.2620791Z",
   "instructions": {
     "steps": [
       {
-        "type": "reference",
         "description": "Microphone Firmware",
+        "type": "reference",
         "updateId": {
-          "provider": "Contoso",
           "name": "Microphone",
+          "provider": "Contoso",
           "version": "1.0"
         }
       },
       {
-        "type": "reference",
         "description": "Speaker Firmware",
+        "type": "reference",
         "updateId": {
-          "provider": "Contoso",
           "name": "Speaker",
+          "provider": "Contoso",
           "version": "1.0"
         }
       }
     ]
   },
-  "createdDateTime": "2022-01-19T22:02:33.2620791Z",
-  "manifestVersion": "4.0"
+  "manifestVersion": "4.0",
+  "updateId": {
+    "name": "Toaster",
+    "provider": "Contoso",
+    "version": "1.0"
+  }
 }

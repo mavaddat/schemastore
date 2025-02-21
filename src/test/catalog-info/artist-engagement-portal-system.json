@@ -2,14 +2,12 @@
   "apiVersion": "backstage.io/v1alpha1",
   "kind": "System",
   "metadata": {
-    "name": "artist-engagement-portal",
     "description": "Everything related to artists",
-    "tags": [
-      "portal"
-    ]
+    "name": "artist-engagement-portal",
+    "tags": ["portal"]
   },
   "spec": {
-    "owner": "team-a",
-    "domain": "artists"
+    "domain": "artists",
+    "owner": "team-a"
   }
 }

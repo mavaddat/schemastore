@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/tmuxinator.json
+# ~/.tmuxinator/sample_number_as_name.yml
+
+name: 222
+windows:
+  - number: echo number as name fixture

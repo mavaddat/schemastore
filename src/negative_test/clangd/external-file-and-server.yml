@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/clangd.json
+Index:
+  External:
+    File: /abs/path/to/an/index.idx
+    # OR
+    Server: my.index.server.com:50051

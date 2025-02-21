@@ -1,13 +1,13 @@
 {
-  "title": "JSON schema for SchemaStore.org catalog files",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "https://json.schemastore.org/schema-catalog.json",
-
-  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/schema-catalog.json",
   "additionalProperties": false,
-  "required": ["schemas", "version", "$schema"],
-
   "properties": {
+    "$schema": {
+      "description": "Link to https://json.schemastore.org/schema-catalog.json",
+      "type": "string",
+      "enum": ["https://json.schemastore.org/schema-catalog.json"]
+    },
     "schemas": {
       "type": "array",
       "description": "A list of JSON schema references.",
@@ -53,11 +53,9 @@
     "version": {
       "description": "The schema version of the catalog",
       "type": "number"
-    },
-    "$schema": {
-      "description": "Link to https://json.schemastore.org/schema-catalog.json",
-      "type": "string",
-      "enum": ["https://json.schemastore.org/schema-catalog.json"]
     }
-  }
+  },
+  "required": ["schemas", "version", "$schema"],
+  "title": "JSON schema for SchemaStore.org catalog files",
+  "type": "object"
 }

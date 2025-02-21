@@ -1,19 +1,19 @@
 {
-    "bindings": [
-        {
-            "type": "blobTrigger",
-            "name": "image",
-            "path": "images/{name}.jpg",
-            "connection": "",
-            "direction": "in"
-        },
-        {
-            "type": "table",
-            "name": "outTable",
-            "tableName": "faceRectangle",
-            "connection": "",
-            "direction": "out"
-        }
-    ],
-    "disabled": false
+  "bindings": [
+    {
+      "connection": "",
+      "direction": "in",
+      "name": "image",
+      "path": "images/{name}.jpg",
+      "type": "blobTrigger"
+    },
+    {
+      "connection": "",
+      "direction": "out",
+      "name": "outTable",
+      "tableName": "faceRectangle",
+      "type": "table"
+    }
+  ],
+  "disabled": false
 }

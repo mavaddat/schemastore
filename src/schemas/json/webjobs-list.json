@@ -1,10 +1,6 @@
 {
-  "title": "JSON schema for Azure Webjobs collection files",
   "$schema": "http://json-schema.org/draft-04/schema#",
-
-  "type": "object",
-  "required": [ "WebJobs" ],
-
+  "id": "https://json.schemastore.org/webjobs-list.json",
   "properties": {
     "WebJobs": {
       "type": "array",
@@ -19,5 +15,8 @@
         }
       }
     }
-  }
+  },
+  "required": ["WebJobs"],
+  "title": "JSON schema for Azure Webjobs collection files",
+  "type": "object"
 }

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../schemas/json/drupal-libraries.json
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      css/layout.css: {}
+      css/style.css: {}
+      css/colors.css: {}
+global-scripts:
+  version: 1.x
+  js:
+    js/navmenu.js: {}

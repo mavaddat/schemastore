@@ -1,9 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$comment": "https://docs.codeclimate.com/docs/advanced-configuration",
-  "title": "Code Climate Configuration",
-  "description": "Configuration file as an alternative for configuring your repository in the settings page.",
-  "type": "object",
   "definitions": {
     "enabled": {
       "type": "object",
@@ -21,12 +18,11 @@
     },
     "threshold": {
       "title": "Threshold",
-      "type": [
-        "integer",
-        "null"
-      ]
+      "type": ["integer", "null"]
     }
   },
+  "description": "Configuration file as an alternative for configuring your repository in the settings page.",
+  "id": "https://json.schemastore.org/codeclimate.json",
   "properties": {
     "version": {
       "title": "Version",
@@ -57,8 +53,8 @@
       "type": "object",
       "properties": {
         "argument-count": {
-          "title": "Argument Count",
           "$ref": "#/definitions/enabled",
+          "title": "Argument Count",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -72,8 +68,8 @@
           }
         },
         "complex-logic": {
-          "title": "Complex Logic",
           "$ref": "#/definitions/enabled",
+          "title": "Complex Logic",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -87,8 +83,8 @@
           }
         },
         "file-lines": {
-          "title": "File Lines",
           "$ref": "#/definitions/enabled",
+          "title": "File Lines",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -102,8 +98,8 @@
           }
         },
         "method-complexity": {
-          "title": "Method Complexity",
           "$ref": "#/definitions/enabled",
+          "title": "Method Complexity",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -117,8 +113,8 @@
           }
         },
         "method-count": {
-          "title": "Method Count",
           "$ref": "#/definitions/enabled",
+          "title": "Method Count",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -132,8 +128,8 @@
           }
         },
         "method-lines": {
-          "title": "Method Lines",
           "$ref": "#/definitions/enabled",
+          "title": "Method Lines",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -147,8 +143,8 @@
           }
         },
         "nested-control-flow": {
-          "title": "Nested Control Flow",
           "$ref": "#/definitions/enabled",
+          "title": "Nested Control Flow",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -162,8 +158,8 @@
           }
         },
         "return-statements": {
-          "title": "Return Statements",
           "$ref": "#/definitions/enabled",
+          "title": "Return Statements",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -177,8 +173,8 @@
           }
         },
         "similar-code": {
-          "title": "Similar Code",
           "$ref": "#/definitions/enabled",
+          "title": "Similar Code",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -191,8 +187,8 @@
           }
         },
         "identical-code": {
-          "title": "Identical Code",
           "$ref": "#/definitions/enabled",
+          "title": "Identical Code",
           "properties": {
             "config": {
               "$ref": "#/definitions/config",
@@ -222,5 +218,7 @@
         "type": "string"
       }
     }
-  }
+  },
+  "title": "Code Climate Configuration",
+  "type": "object"
 }

@@ -1,166 +1,170 @@
 {
-    "Logging": {
-      "LogLevel": {
-        "Default": "Debug"
-      },
-      "NLog": {
-        "IncludeScopes": true
-      }
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug"
     },
     "NLog": {
-      "autoReload": true,
-      "throwConfigExceptions": true,
-      "internalLogLevel": "Info",
-      "internalLogFile": "${basedir}/internal-nlog.txt",
-      "extensions": [
-        { "assembly": "NLog.Extensions.Logging" },
-        { "assembly": "NLog.Web.AspNetCore" }
-      ],
-      "variables": {
-        "var_logdir": "c:/temp"
+      "IncludeScopes": true
+    }
+  },
+  "NLog": {
+    "autoReload": true,
+    "default-wrapper": {
+      "overflowAction": "Block",
+      "type": "AsyncWrapper"
+    },
+    "extensions": [
+      {
+        "assembly": "NLog.Extensions.Logging"
       },
-      "default-wrapper": {
-        "type": "AsyncWrapper",
-        "overflowAction": "Block"
+      {
+        "assembly": "NLog.Web.AspNetCore"
+      }
+    ],
+    "internalLogFile": "${basedir}/internal-nlog.txt",
+    "internalLogLevel": "Info",
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Trace",
+        "writeTo": "all-file, database"
       },
-      "targets": {
-        "async": false,
-        "all-file": {
-          "type": "File",
-          "fileName": "${var_logdir}/nlog-all-${shortdate}.log",
-          "layout": {
-            "type": "JsonLayout",
-            "Attributes": [
-              {
-                "name": "timestamp",
-                "layout": "${date:format=o}"
-              },
-              {
-                "name": "level",
-                "layout": "${level}"
-              },
-              {
-                "name": "logger",
-                "layout": "${logger}"
-              },
-              {
-                "name": "message",
-                "layout": "${message:raw=true}"
-              },
-              {
-                "name": "properties",
-                "encode": false,
-                "layout": {
-                  "type": "JsonLayout",
-                  "includeallproperties": "true"
-                }
-              }
-            ]
+      {
+        "final": true,
+        "logger": "Microsoft.*",
+        "maxLevel": "Info"
+      },
+      {
+        "filters": {
+          "whenRepeated": {
+            "action": "Ignore",
+            "layout": "${message}"
           }
         },
-        "own-console": {
-          "type": "LimitingWrapper",
-          "interval": "00:00:01",
-          "messageLimit": 100,
-          "target": {
-            "type": "ColoredConsole",
-            "layout": "${longdate}|${event-properties:item=EventId_Id:whenEmpty=0}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|${callsite}",
-            "rowHighlightingRules": [
-              {
-                "condition": "level == LogLevel.Error",
-                "foregroundColor": "Red"
-              },
-              {
-                "condition": "level == LogLevel.Fatal",
-                "foregroundColor": "Red",
-                "backgroundColor": "White"
-              }
-            ]
+        "logger": "*",
+        "minLevel": "Debug",
+        "writeTo": "own-console"
+      },
+      {
+        "filterDefaultAction": "Log",
+        "filters": [
+          {
+            "action": "Ignore",
+            "condition": "contains('${message}','HeartbeatRequest')",
+            "type": "when"
+          },
+          {
+            "action": "Ignore",
+            "condition": "contains('${message}','HeartbeatResponse')",
+            "type": "when"
           }
-        },
-        "database": {
-          "type": "Database",
-          "dbProvider": "System.Data.SqlClient",
-          "connectionString": "Data Source=database server;Initial Catalog=database;Trusted_Connection=False;User Id=AppUser;Password=AppUserPassword;",
-          "keepConnection": "true",
-          "commandText": "insert into dbo.log (Guid, MachineName,Timestamp,Level,Message,Logger,Callsite,Exception) values (@Guid, @MachineName, @Timestamp, @Level, @Message, @Logger, @Callsite, @Exception);",
-          "parameters": [
+        ],
+        "logger": "*",
+        "minLevel": "Debug",
+        "writeTo": "database"
+      }
+    ],
+    "targets": {
+      "all-file": {
+        "fileName": "${var_logdir}/nlog-all-${shortdate}.log",
+        "layout": {
+          "Attributes": [
             {
-              "name": "@Guid",
-              "layout": "${guid}"
-            },
-            {
-              "name": "@MachineName",
-              "layout": "${machinename}"
-            },
-            {
-              "name": "@Timestamp",
               "layout": "${date:format=o}",
-              "dbType": "DbType.DateTime"
+              "name": "timestamp"
             },
             {
-              "name": "@Level",
-              "layout": "${level}"
+              "layout": "${level}",
+              "name": "level"
             },
             {
-              "name": "@Message",
-              "layout": "${message}"
+              "layout": "${logger}",
+              "name": "logger"
             },
             {
-              "name": "@Logger",
-              "layout": "${logger}"
+              "layout": "${message:raw=true}",
+              "name": "message"
             },
             {
-              "name": "@Callsite",
-              "layout": "${callsite}"
-            },
-            {
-              "name": "@Exception",
-              "layout": "${exception:tostring}"
+              "encode": false,
+              "layout": {
+                "includeallproperties": "true",
+                "type": "JsonLayout"
+              },
+              "name": "properties"
             }
-          ]
-        }
+          ],
+          "type": "JsonLayout"
+        },
+        "type": "File"
       },
-      "rules": [
-        {
-          "logger": "*",
-          "minLevel": "Trace",
-          "writeTo": "all-file, database"
-        },
-        {
-          "logger": "Microsoft.*",
-          "maxLevel": "Info",
-          "final": true
-        },
-        {
-          "logger": "*",
-          "minLevel": "Debug",
-          "writeTo": "own-console",
-          "filters": {
-            "whenRepeated": {
-              "layout": "${message}",
-              "action": "Ignore"
-            }
+      "async": false,
+      "database": {
+        "commandText": "insert into dbo.log (Guid, MachineName,Timestamp,Level,Message,Logger,Callsite,Exception) values (@Guid, @MachineName, @Timestamp, @Level, @Message, @Logger, @Callsite, @Exception);",
+        "connectionString": "Data Source=database server;Initial Catalog=database;Trusted_Connection=False;User Id=AppUser;Password=AppUserPassword;",
+        "dbProvider": "System.Data.SqlClient",
+        "keepConnection": "true",
+        "parameters": [
+          {
+            "layout": "${guid}",
+            "name": "@Guid"
+          },
+          {
+            "layout": "${machinename}",
+            "name": "@MachineName"
+          },
+          {
+            "dbType": "DbType.DateTime",
+            "layout": "${date:format=o}",
+            "name": "@Timestamp"
+          },
+          {
+            "layout": "${level}",
+            "name": "@Level"
+          },
+          {
+            "layout": "${message}",
+            "name": "@Message"
+          },
+          {
+            "layout": "${logger}",
+            "name": "@Logger"
+          },
+          {
+            "layout": "${callsite}",
+            "name": "@Callsite"
+          },
+          {
+            "layout": "${exception:tostring}",
+            "name": "@Exception"
           }
-        },
-        {
-          "logger": "*",
-          "minLevel": "Debug",
-          "writeTo": "database",
-          "filterDefaultAction": "Log",
-          "filters": [
+        ],
+        "type": "Database"
+      },
+      "own-console": {
+        "interval": "00:00:01",
+        "messageLimit": 100,
+        "target": {
+          "layout": "${longdate}|${event-properties:item=EventId_Id:whenEmpty=0}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|${callsite}",
+          "rowHighlightingRules": [
             {
-              "type": "when",
-              "condition": "contains('${message}','HeartbeatRequest')",
-              "action": "Ignore"
+              "condition": "level == LogLevel.Error",
+              "foregroundColor": "Red"
             },
             {
-              "type": "when",
-              "condition": "contains('${message}','HeartbeatResponse')",
-              "action": "Ignore"
+              "backgroundColor": "White",
+              "condition": "level == LogLevel.Fatal",
+              "foregroundColor": "Red"
             }
-          ]
-        }
-      ]
+          ],
+          "type": "ColoredConsole"
+        },
+        "type": "LimitingWrapper"
+      }
+    },
+    "throwConfigExceptions": true,
+    "variables": {
+      "var_logdir": "c:/temp"
     }
   }
+}

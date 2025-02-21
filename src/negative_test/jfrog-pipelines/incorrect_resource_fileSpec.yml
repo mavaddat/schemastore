@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=../../schemas/json/jfrog-pipelines.json
+resources:
+  - name: FileSpecResource
+    type: FileSpec
+    configuration:
+      sourceArtifactory1: jfrog.io/artifactory

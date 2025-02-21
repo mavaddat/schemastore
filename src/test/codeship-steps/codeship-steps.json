@@ -1,45 +1,40 @@
 [
   {
-    "type": "parallel",
-    "tag": "^(master|staging/.*)$",
     "dockercfg_service": "dockercfg_generator",
     "steps": [
       {
-        "type": "serial",
         "steps": [
           {
-            "service": "foo",
-            "command": "echo one"
+            "command": "echo one",
+            "service": "foo"
           },
           {
-            "service": "foo",
-            "command": "echo two"
+            "command": "echo two",
+            "service": "foo"
           }
-        ]
+        ],
+        "type": "serial"
       },
       {
-        "type": "serial",
         "steps": [
           {
-            "service": "bar",
-            "command": "echo one"
+            "command": "echo one",
+            "service": "bar"
           },
           {
-            "service": "bar",
-            "command": "echo two"
+            "command": "echo two",
+            "service": "bar"
           }
-        ]
+        ],
+        "type": "serial"
       }
-    ]
+    ],
+    "tag": "^(master|staging/.*)$",
+    "type": "parallel"
   },
   {
-    "type": "parallel",
-    "tag": "^(master|staging/.*)$",
     "dockercfg_service": "dockercfg_generator",
-    "services": [
-      "foo",
-      "bar"
-    ],
+    "services": ["foo", "bar"],
     "steps": [
       {
         "command": "echo one"
@@ -47,40 +42,37 @@
       {
         "command": "echo two"
       }
-    ]
-  },
-  {
-    "service": "foo",
-    "tag": "master",
-    "encrypted_dockercfg_path": "dockercfg.encrypted",
-    "command": "echo one"
-  },
-  {
-    "service": "foo",
-    "tag": "master",
-    "encrypted_dockercfg_path": "dockercfg.encrypted",
-    "command": "echo two"
-  },
-  {
-    "service": "bar",
-    "tag": "master",
-    "encrypted_dockercfg_path": "dockercfg.encrypted",
-    "command": "echo one"
-  },
-  {
-    "service": "bar",
-    "tag": "master",
-    "encrypted_dockercfg_path": "dockercfg.encrypted",
-    "command": "echo two"
-  },
-  {
-    "type": "serial",
-    "tag": "master",
-    "encrypted_dockercfg_path": "dockercfg.encrypted",
-    "services": [
-      "foo",
-      "bar"
     ],
+    "tag": "^(master|staging/.*)$",
+    "type": "parallel"
+  },
+  {
+    "command": "echo one",
+    "encrypted_dockercfg_path": "dockercfg.encrypted",
+    "service": "foo",
+    "tag": "master"
+  },
+  {
+    "command": "echo two",
+    "encrypted_dockercfg_path": "dockercfg.encrypted",
+    "service": "foo",
+    "tag": "master"
+  },
+  {
+    "command": "echo one",
+    "encrypted_dockercfg_path": "dockercfg.encrypted",
+    "service": "bar",
+    "tag": "master"
+  },
+  {
+    "command": "echo two",
+    "encrypted_dockercfg_path": "dockercfg.encrypted",
+    "service": "bar",
+    "tag": "master"
+  },
+  {
+    "encrypted_dockercfg_path": "dockercfg.encrypted",
+    "services": ["foo", "bar"],
     "steps": [
       {
         "command": "echo one"
@@ -88,6 +80,8 @@
       {
         "command": "echo two"
       }
-    ]
+    ],
+    "tag": "master",
+    "type": "serial"
   }
 ]

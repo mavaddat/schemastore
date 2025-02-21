@@ -1,15 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "title": "DocFx configuration file",
-  "type": "object",
-  "properties": {
-    "metadata": {
-      "$ref": "#/definitions/metadataConfig"
-    },
-    "build": {
-      "$ref": "#/definitions/buildConfig"
-    }
-  },
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "buildConfig": {
       "type": "object",
@@ -123,7 +113,7 @@
         },
         "markdownEngineName": {
           "type": "string",
-          "description": "Set the name of markdown engine, default is dfm, and another build-in engine is gfm."
+          "description": "Set the name of markdown engine, default is dfm, and another built-in engine is gfm."
         },
         "markdownEngineProperties": {
           "type": "object",
@@ -200,10 +190,7 @@
         }
       },
       "additionalProperties": false,
-      "required": [
-        "src",
-        "dest"
-      ]
+      "required": ["src", "dest"]
     },
     "fileMappingContent": {
       "anyOf": [
@@ -364,9 +351,7 @@
         }
       },
       "additionalProperties": false,
-      "required": [
-        "files"
-      ]
+      "required": ["files"]
     },
     "xref": {
       "oneOf": [
@@ -470,5 +455,16 @@
       "type": "boolean",
       "description": "If set to true, DocFX would not fetch Git related information for articles."
     }
-  }
+  },
+  "id": "https://json.schemastore.org/docfx.json",
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/metadataConfig"
+    },
+    "build": {
+      "$ref": "#/definitions/buildConfig"
+    }
+  },
+  "title": "DocFx configuration file",
+  "type": "object"
 }

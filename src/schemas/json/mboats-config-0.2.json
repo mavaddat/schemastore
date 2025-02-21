@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://json.schemastore.org/mboats-config-0.2.json",
   "$ref": "#/definitions/MBOATS",
   "definitions": {
     "MBOATS": {
@@ -19,9 +20,9 @@
         },
         "pageLoadTimeout": {
           "type": "integer",
-          "default": 60,
-          "minimum": 30,
-          "maximum": 120
+          "default": 60000,
+          "minimum": 30000,
+          "maximum": 120000
         },
         "elementFindTimeout": {
           "type": "integer",
@@ -46,19 +47,13 @@
         "mode": {
           "type": "string",
           "default": "local",
-          "enum": [
-            "local",
-            "remote"
-          ],
+          "enum": ["local", "remote"],
           "description": "The mode of test execution."
         },
         "runnerParallelism": {
           "type": "string",
           "default": "feature",
-          "enum": [
-            "feature",
-            "scenario"
-          ]
+          "enum": ["feature", "scenario"]
         },
         "threadCount": {
           "type": "integer",
@@ -69,19 +64,12 @@
         "clients": {
           "type": "string",
           "default": "chrome",
-          "enum": [
-            "chrome",
-            "firefox",
-            "edge"
-          ]
+          "enum": ["chrome", "firefox", "edge"]
         },
         "clientParallelism": {
           "type": "string",
           "default": "stacked",
-          "enum": [
-            "stacked",
-            "interleaved"
-          ]
+          "enum": ["stacked", "interleaved"]
         },
         "video": {
           "$ref": "#/definitions/MBOATS/definitions/Video"
@@ -105,10 +93,7 @@
           "$ref": "#/definitions/MBOATS/definitions/Threadbare"
         }
       },
-      "required": [
-        "appId",
-        "appName"
-      ],
+      "required": ["appId", "appName"],
       "title": "MBOATS Framework Properties",
       "definitions": {
         "AWSEC2": {
@@ -122,10 +107,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "publicName",
-            "serverPort"
-          ],
+          "required": ["publicName", "serverPort"],
           "title": "AWS EC2 Configuration"
         },
         "AWSS3": {
@@ -175,11 +157,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "featuresPath",
-            "stepdefsPackage",
-            "tagExpression"
-          ],
+          "required": ["featuresPath", "stepdefsPackage", "tagExpression"],
           "title": "CucumberOptions"
         },
         "Email": {
@@ -196,11 +174,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "auth",
-            "invitationLinkRegex",
-            "oktaTokenRegex"
-          ],
+          "required": ["auth", "invitationLinkRegex", "oktaTokenRegex"],
           "title": "Email Configuration",
           "definitions": {
             "Auth": {
@@ -272,9 +246,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "report"
-              ],
+              "required": ["report"],
               "title": "Collection"
             }
           }
@@ -293,11 +265,7 @@
               "$ref": "#/definitions/MBOATS/definitions/NetworkLogs/definitions/Request"
             }
           },
-          "required": [
-            "enabled",
-            "request",
-            "response"
-          ],
+          "required": ["enabled", "request", "response"],
           "title": "NetworkLogs",
           "definitions": {
             "Request": {
@@ -314,11 +282,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "body",
-                "cookies",
-                "headers"
-              ],
+              "required": ["body", "cookies", "headers"],
               "title": "Request"
             }
           }
@@ -331,9 +295,7 @@
               "type": "null"
             }
           },
-          "required": [
-            "server"
-          ],
+          "required": ["server"],
           "title": "Threadbare Configuration"
         },
         "Video": {
@@ -353,12 +315,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "enabled",
-            "format",
-            "location",
-            "prefix"
-          ],
+          "required": ["enabled", "format", "location", "prefix"],
           "title": "Video"
         }
       }

@@ -1,16 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$comment": "https://yamllint.readthedocs.io/en/stable/configuration.html",
-  "title": "yamllint",
-  "description": "yamllint uses a set of rules to check source files for problems.",
-  "type": "object",
+  "$ref": "#/definitions/ignore",
   "definitions": {
     "toggle": {
       "type": "string",
-      "enum": [
-        "enable",
-        "disable"
-      ]
+      "enum": ["enable", "disable"]
     },
     "ignore": {
       "properties": {
@@ -32,7 +27,8 @@
       }
     }
   },
-  "$ref": "#/definitions/ignore",
+  "description": "yamllint uses a set of rules to check source files for problems.",
+  "id": "https://json.schemastore.org/yamllint.json",
   "properties": {
     "extends": {
       "title": "Extends",
@@ -45,15 +41,11 @@
         "title": "YAML File",
         "type": "string"
       },
-      "default": [
-        "*.yaml",
-        "*.yml",
-        ".yamllint"
-      ]
+      "default": ["*.yaml", "*.yml", ".yamllint"]
     },
     "locale": {
       "title": "Locale",
-      "description": "This is passed to Python’s locale.setlocale.",
+      "description": "This is passed to Python's locale.setlocale.",
       "type": "string"
     },
     "rules": {
@@ -69,8 +61,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "forbid": {
                   "title": "Forbid",
@@ -81,9 +73,7 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "non-empty"
-                      ]
+                      "enum": ["non-empty"]
                     }
                   ],
                   "default": false
@@ -128,8 +118,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "forbid": {
                   "title": "Forbid",
@@ -140,9 +130,7 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "non-empty"
-                      ]
+                      "enum": ["non-empty"]
                     }
                   ],
                   "default": false
@@ -187,8 +175,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "max-spaces-before": {
                   "title": "Max Spaces Before",
@@ -218,8 +206,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "max-spaces-before": {
                   "title": "Max Spaces Before",
@@ -255,8 +243,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "require-starting-space": {
                   "title": "Require Starting Space",
@@ -294,8 +282,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
-              "$ref": "#/definitions/allRules"
+              "$ref": "#/definitions/allRules",
+              "type": "object"
             }
           ],
           "default": {
@@ -313,8 +301,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "present": {
                   "title": "Present",
@@ -338,8 +326,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "present": {
                   "title": "Present",
@@ -365,8 +353,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "max": {
                   "title": "Max",
@@ -402,8 +390,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "forbid-in-block-mappings": {
                   "title": "Forbid in Block Mappings",
@@ -433,8 +421,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "max-spaces-after": {
                   "title": "Max Spaces After",
@@ -458,8 +446,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "spaces": {
                   "title": "Spaces",
@@ -470,15 +458,13 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "consistent"
-                      ]
+                      "enum": ["consistent"]
                     }
                   ],
                   "default": "consistent"
                 },
-                "indent-sequence": {
-                  "title": "Indent Sequence",
+                "indent-sequences": {
+                  "title": "Indent Sequences",
                   "description": "Defines whether block sequences should be indented or not (when in a mapping, this indentation is not mandatory – some people perceive the - as part of the indentation).",
                   "anyOf": [
                     {
@@ -486,10 +472,7 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "whatever",
-                        "consistent"
-                      ]
+                      "enum": ["whatever", "consistent"]
                     }
                   ],
                   "default": true
@@ -516,8 +499,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
-              "$ref": "#/definitions/allRules"
+              "$ref": "#/definitions/allRules",
+              "type": "object"
             }
           ],
           "default": "enable"
@@ -533,8 +516,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
-              "$ref": "#/definitions/allRules"
+              "$ref": "#/definitions/allRules",
+              "type": "object"
             }
           ],
           "default": "disable"
@@ -550,8 +533,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "max": {
                   "title": "Max",
@@ -587,8 +570,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
-              "$ref": "#/definitions/allRules"
+              "$ref": "#/definitions/allRules",
+              "type": "object"
             }
           ],
           "default": "enable"
@@ -604,17 +587,14 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "type": {
                   "title": "Type",
                   "description": "Unix to use UNIX-typed new line characters (\n), or dos to use DOS-typed new line characters (\r\n).",
                   "type": "string",
-                  "enum": [
-                    "unix",
-                    "dos"
-                  ],
+                  "enum": ["unix", "dos", "platform"],
                   "default": "unix"
                 }
               }
@@ -633,8 +613,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "forbid-implicit-octal": {
                   "title": "Forbid Implicit Octal",
@@ -664,18 +644,14 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "quote-type": {
                   "title": "Quote Type",
                   "description": "Defines allowed quotes.",
                   "type": "string",
-                  "enum": [
-                    "single",
-                    "double",
-                    "any"
-                  ],
+                  "enum": ["single", "double", "any"],
                   "default": "any"
                 },
                 "required": {
@@ -687,9 +663,7 @@
                     },
                     {
                       "type": "string",
-                      "enum": [
-                        "only-when-needed"
-                      ]
+                      "enum": ["only-when-needed"]
                     }
                   ],
                   "default": true
@@ -730,8 +704,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
-              "$ref": "#/definitions/allRules"
+              "$ref": "#/definitions/allRules",
+              "type": "object"
             }
           ],
           "default": "enable"
@@ -747,8 +721,8 @@
               "type": "boolean"
             },
             {
-              "type": "object",
               "$ref": "#/definitions/allRules",
+              "type": "object",
               "properties": {
                 "allowed-values": {
                   "title": "Allowed Values",
@@ -777,10 +751,7 @@
                       "off"
                     ]
                   },
-                  "default": [
-                    "true",
-                    "false"
-                  ]
+                  "default": ["true", "false"]
                 },
                 "check-keys": {
                   "title": "Check Keys",
@@ -797,5 +768,7 @@
         }
       }
     }
-  }
+  },
+  "title": "yamllint",
+  "type": "object"
 }

@@ -1,11 +1,11 @@
 {
-  "name": "my-mod",
   "description": "subpaths with conditions to paths",
   "exports": {
     ".": "./main.js",
     "./feature": {
-      "node": "./feature-node.js",
-      "default": "./feature.js"
+      "default": "./feature.js",
+      "node": "./feature-node.js"
     }
-  }
+  },
+  "name": "my-mod"
 }
